@@ -1,0 +1,199 @@
+CRITICAL - 2024-08-03 05:19:43 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user_layouts/login.php"
+[Method: GET, Route: usercon]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user_layouts/login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user_layouts/login', [], true)
+ 3 APPPATH\Controllers\UserCon.php(9): view('user_layouts/login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 05:20:29 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "users_layouts/login.php"
+[Method: GET, Route: usercon]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('users_layouts/login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 3 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 05:20:34 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "users_layouts/login.php"
+[Method: GET, Route: usercon]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('users_layouts/login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 3 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 05:23:54 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "users_layouts/login.php"
+[Method: GET, Route: usercon]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('users_layouts/login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 3 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 05:25:07 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "users_layouts/login.php"
+[Method: GET, Route: usercon]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('users_layouts/login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 3 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 05:28:08 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "users_layouts/login.php"
+[Method: GET, Route: usercon]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('users_layouts/login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 3 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 05:34:29 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "users_layouts/login.php"
+[Method: GET, Route: usercon]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('users_layouts/login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 3 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 05:59:11 --> ErrorException: Undefined property: CodeIgniter\View\View::$load
+[Method: GET, Route: usercon]
+in APPPATH\Views\users_layouts\login.php on line 1.
+ 1 APPPATH\Views\users_layouts\login.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$load', 'C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\login.php', 1)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\login.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 5 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 05:59:51 --> Error: Call to undefined method CodeIgniter\View\View::view()
+[Method: GET, Route: usercon]
+in APPPATH\Views\users_layouts\login.php on line 1.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 4 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 06:06:33 --> ErrorException: Undefined property: CodeIgniter\View\View::$load
+[Method: GET, Route: usercon]
+in APPPATH\Views\users_layouts\login.php on line 1.
+ 1 APPPATH\Views\users_layouts\login.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$load', 'C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\login.php', 1)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\login.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 5 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 06:06:34 --> ErrorException: Undefined property: CodeIgniter\View\View::$load
+[Method: GET, Route: usercon]
+in APPPATH\Views\users_layouts\login.php on line 1.
+ 1 APPPATH\Views\users_layouts\login.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$load', 'C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\login.php', 1)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\login.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 5 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 06:20:10 --> ErrorException: include(login-header-footer/header): Failed to open stream: No such file or directory
+[Method: GET, Route: usercon]
+in APPPATH\Views\users_layouts\login.php on line 1.
+ 1 APPPATH\Views\users_layouts\login.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(login-header-footer/header): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\login.php', 1)
+ 2 APPPATH\Views\users_layouts\login.php(1): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\login.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/login', [], true)
+ 6 APPPATH\Controllers\UserCon.php(9): view('users_layouts/login')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 09:15:54 --> ErrorException: include(login-header-footer/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: usercon/register]
+in APPPATH\Views\users_layouts\register.php on line 1.
+ 1 APPPATH\Views\users_layouts\register.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(login-header-footer/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\register.php', 1)
+ 2 APPPATH\Views\users_layouts\register.php(1): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\register.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/register', [], true)
+ 6 APPPATH\Controllers\UserCon.php(14): view('users_layouts/register')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->register()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 09:23:45 --> ErrorException: include(login-header-footer/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: usercon/register]
+in APPPATH\Views\users_layouts\register.php on line 1.
+ 1 APPPATH\Views\users_layouts\register.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(login-header-footer/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\register.php', 1)
+ 2 APPPATH\Views\users_layouts\register.php(1): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\register.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/register', [], true)
+ 6 APPPATH\Controllers\UserCon.php(14): view('users_layouts/register')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->register()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-03 09:23:45 --> ErrorException: include(login-header-footer/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: usercon/register]
+in APPPATH\Views\users_layouts\register.php on line 1.
+ 1 APPPATH\Views\users_layouts\register.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(login-header-footer/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\register.php', 1)
+ 2 APPPATH\Views\users_layouts\register.php(1): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\hotel\\app\\Views\\users_layouts\\register.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users_layouts/register', [], true)
+ 6 APPPATH\Controllers\UserCon.php(14): view('users_layouts/register')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserCon->register()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserCon))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
