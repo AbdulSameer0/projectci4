@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2024 at 03:45 PM
+-- Generation Time: Nov 29, 2024 at 05:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -61,8 +61,16 @@ CREATE TABLE `programme_info` (
   `attandancePdf` longblob NOT NULL,
   `materialLink` varchar(200) NOT NULL,
   `paymentdone` varchar(200) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `programme_info`
+--
+
+INSERT INTO `programme_info` (`prog_id`, `progTitle`, `targetGroup`, `date`, `progDirector`, `dealingAsstt`, `progPdf`, `attandancePdf`, `materialLink`, `paymentdone`, `created_at`, `updated_at`) VALUES
+(32, 'sameer', 'sameer', '2024-11-29', 'sameer', 'DA-1', '', '', 'sameer', 'yes', '2024-11-29 15:46:35', '2024-11-29 15:46:35');
 
 --
 -- Indexes for dumped tables
@@ -94,7 +102,7 @@ ALTER TABLE `admin_info`
 -- AUTO_INCREMENT for table `programme_info`
 --
 ALTER TABLE `programme_info`
-  MODIFY `prog_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `prog_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

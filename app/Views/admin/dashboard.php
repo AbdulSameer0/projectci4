@@ -36,7 +36,7 @@
                                                 <th>Programme Schedule<br> (In pdf)</th>
                                                 <th>Attendance<br> (In pdf)</th>
                                                 <th>Reading matrial</th>
-                                                <th>Payment pdf</th>
+                                                <!-- <th>Payment pdf</th> -->
                                                 <th>Payment Done</th>
                                                 <th>Action</th>
                                             </tr>
@@ -80,24 +80,7 @@
                                                         <td class="text-center text-danger">
                                                             <?php echo $key['paymentdone']; ?>
                                                         </td>
-
-                                                    </tr>
-
-                                                <?php }
-                                        } else { ?>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td>demo</td>
-                                                    <td class="">
+                                                        <td class="">
                                                         <div
                                                             class="row d-flex justify-content-between align-items-start w-100">
                                                             <div role="presentation" class="dropdown ml-5">
@@ -124,7 +107,12 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                </tr>
+
+                                                    </tr>
+
+                                                <?php }
+                                        } else { ?>
+                                               
                                                 <tr>
                                                     <td colspan="12" class="text-center text-danger">No Data Found
                                                     </td>
@@ -155,7 +143,6 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-area custom-background">
-                                <?php //echo form_open(base_url('/admin/saveDetails'), array('id' => 'doc_form_id', 'name' => 'doc_form', 'method' => 'post')); ?>
                                 <form id="add_form_details" action="<?php echo base_url('/admin/saveDetails'); ?>"
                                     method="POST">
                                     <table class="table table-bordered">
@@ -213,13 +200,6 @@
                                             </td>
                                             <td><input class="form-control" id="materialLink" name="materialLink"></td>
                                         </tr>
-                                        <!-- <tr>
-                                            <td style="width: 30%;"><label for="attandancePdf">Payment
-                                                    PDF</label>
-                                            </td>
-                                            <td><input type="file" class="form-control mt-2" id="paymentPdf"
-                                                    name="paymentPdf"></td>
-                                        </tr> -->
                                         <tr>
                                             <td style="width: 30%;"><label for="paymentdone">Payment Done</label></td>
                                             <td>

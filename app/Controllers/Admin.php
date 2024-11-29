@@ -64,62 +64,85 @@ class Admin extends BaseController
     // save details function
     public function saveDetails()
     {
-        // echo "j";
-        // die;
-        // echo $this->request->getPost('progTitle');
-        // $progTitle = $this->request->getPost('progTitle');
-        // echo $progTitle;
-        // die;
-        // Upload files (if any)
-        // echo "hello";
-        // die;
-        $data = array(
-            'progTitle' => $this->request->getPost('progTitle'),
-            'targetGroup' => $this->request->getPost('targetGroup'),
-            'date' => $this->request->getPost('date'),
-            'progDirector' => $this->request->getPost('progDirector'),
-            'dealingAsstt' => $this->request->getPost('dealingAsstt'),
-            'progPdf' => "pdf",
-            'attandancePdf' => "pdf",
-            'materialLink' => $this->request->getPost('materialLink'),
-            'paymentdone' => $this->request->getPost('paymentdone'),
 
 
-        );
+        $request = service('request');
+
+        // Collect form data
+        $data = [
+            'progTitle' => $request->getPost('progTitle'),
+            'targetGroup' => $request->getPost('targetGroup'),
+            'date' => $request->getPost('date'),
+            'progDirector' => $request->getPost('progDirector'),
+            'dealingAsstt' => $request->getPost('dealingAsstt'),
+            'progPdf' => '',
+            'attandancePdf' => '',
+            'materialLink' => $request->getPost('materialLink'),
+            'paymentdone' => $request->getPost('paymentdone'),
+        ];
+
         // print_r($data);
         // die;
-        // File Upload for PDF
-        // $config['upload_path'] = './uploads/';
-        // $config['allowed_types'] = 'pdf';
-        // $config['max_size'] = 10240;  // Max 10MB
-        // // Initialize upload library
-        // $this->load->library('upload', $config);
 
-        // $fileFields = ['progPdf', 'attandancePdf', 'paymentPdf'];
-        // foreach ($fileFields as $field) {
-        //     if ($_FILES[$field]['name']) {
-        //         if (!$this->upload->do_upload($field)) {
-        //             $this->session->set_flashdata('error', $this->upload->display_errors());
-        //             redirect('admin/saveDetails');
-        //         } else {
-        //             $fileData = $this->upload->data();
-        //             $data[$field] = $fileData['file_name'];
-        //         }
-        //     }
-        // }
-        // // Save data to the database using the model
-        // $programmeModel = new ProgrammeModel();
-        // $programmeModel = new ProgrammeModel();
-        $result = $this->programmeModel->saveDetail($data);
-        echo json_encode($result);
+        // File Upload Configuration
+        $fileFields = ['progPdf', 'attandancePdf'];
+        $uploadPath = WRITEPATH . 'uploads/';
+        helper(['form', 'filesystem']);
 
+        foreach ($fileFields as $field) {
+            $file = $this->request->getFile($field);
 
-        // $result = $model->saveDetail($data);
-        print_r($result);
-        die;
+            if ($file && $file->isValid() && !$file->hasMoved()) {
+                $newName = $file->getRandomName();
+                $file->move($uploadPath, $newName);
+                $data[$field] = $newName; // Save file name in data array
+            }
+        }
 
+        // print_r($data);
+        //     die;
+
+        // Save data to the database using the model
+        $programmeModel = new \App\Models\ProgrammeModel();
+
+        try {
+            $result = $programmeModel->saveDetail($data);
+            // print_r($data);
+            // die;
+            echo json_encode(['status' => 'success', 'message' => 'Details saved successfully!', 'data' => $result]);
+        } catch (\Exception $e) {
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
-    // admin logout function 
+
+    public function deleteDetails()
+    {
+        $request = service('request');
+        $prog_id = $request->getPost('prog_id'); // Ensure the ID is passed correctly
+
+        $programmeModel = new \App\Models\ProgrammeModel();
+
+        try {
+            $result = $programmeModel->deleteDetail($prog_id);
+
+            if ($result['status']) {
+                echo json_encode(['status' => 'success', 'message' => $result['message']]);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => $result['message']]);
+            }
+        } catch (\Exception $e) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'An error occurred while deleting the record.',
+                'error_detail' => $e->getMessage(),
+            ]);
+        }
+    }
+
+
+
+
+    // Admin logout function
     public function logout()
     {
         $session = session();
