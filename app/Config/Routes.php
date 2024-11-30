@@ -14,5 +14,6 @@ $routes->post('admin/login', 'Admin::login');                      //login actio
 $routes->get('admin/logout', 'Admin::logout');                    // Logout action
 $routes->get('admin/dashboard', 'Admin::dashboard');                  //dashboard page 
 $routes->post('admin/saveDetails', 'Admin::saveDetails');            //form details add here 
-$routes->post('admin/deleteDetails', 'Admin::deleteDetails');    //from delete action
+// $routes->get('admin/deleteDetails/(:num)', 'Admin::deleteDetails/$1');    //from delete action
+$routes->get('admin/delete/(:num)', 'Admin::delete/$1');
 
