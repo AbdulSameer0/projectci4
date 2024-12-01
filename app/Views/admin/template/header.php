@@ -78,10 +78,13 @@
                         <ul class="navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px">
                                 <a href="#" class="user-profile dropdown-toggle" aria-haspopup="true"
-                                    id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <?= session()->get('name'); ?>
-                                    <!-- Dynamically display the logged-in user's name -->
+                                    id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"
+                                    style="font-size: 1.0rem;">
+                                    <?= ucfirst(session()->get('name')); ?>
+                                    <!-- Dynamically display the logged-in user's name with the first letter capitalized -->
                                 </a>
+
+
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#"> Profile</a>

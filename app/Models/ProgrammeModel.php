@@ -52,6 +52,13 @@ class ProgrammeModel extends Model
             ];
         }
     }
+
+    public function lockPdfById($prog_id)
+    {
+        return $this->db->table('programme_info')
+            ->where('id', $prog_id)
+            ->update(['is_locked' => 1]);
+    }
     // public function update_user_details($id)
     // {
 

@@ -19,10 +19,10 @@ class Admin extends BaseController
     public function login()
     {
         $session = session();
-        $email = $this->request->getPost('email');
+        $name = $this->request->getPost('name');
         $password = $this->request->getPost('password');
         $model = new AdminModel();
-        $admin = $model->where('email', $email)->first();
+        $admin = $model->where('name', $name)->first();
 
         if ($admin && $admin['password'] === $password) {
             // Store user info in session (you may want to store more than just 'name')
@@ -35,6 +35,43 @@ class Admin extends BaseController
             return redirect()->to('/');
         }
     }
+
+    public function register()
+    {
+        $session = session();
+        if ($this->request->getMethod() === 'post') {
+            $name = $this->request->getPost('name');
+            $email = $this->request->getPost('email');
+            $password = $this->request->getPost('password');
+
+            //  print_r($name);
+//             die;
+            $model = new AdminModel();
+
+            // Check if the username or email already exists
+            $existingUser = $model->where('name', $name)->orWhere('email', $email)->first();
+            if ($existingUser) {
+                $session->setFlashdata('error', '<i class="fa fa-warning"></i> Username or email already exists.');
+                return redirect()->to('/admin/register');
+            }
+
+            // Save the new user to the database
+            $data = [
+                'name' => $name,
+                'email' => $email,
+                'password' => $password, // Consider hashing this for security (e.g., password_hash())
+            ];
+            // print_r($data);
+            // die;
+            $model->insert($data);
+
+            $session->setFlashdata('success', '<i class="fa fa-check-circle"></i> Registration successful. You can now login.');
+            return redirect()->to('/');
+        }
+
+        return view('admin/register'); // Load the registration view
+    }
+
 
     // admin dashboard function 
     public function dashboard()
@@ -147,6 +184,19 @@ class Admin extends BaseController
         // Redirect back to the dashboard
         return redirect()->to(base_url('admin/dashboard'));
     }
+
+    public function lockPdf($prog_id)
+    {
+        // Load model or perform necessary actions
+        $success = $this->ProgrammeModel->lockPdfById($prog_id);
+
+        if ($success) {
+            return $this->response->setJSON(['message' => 'PDF locked successfully!']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['message' => 'Failed to lock PDF.']);
+        }
+    }
+
 
 
     // Admin logout function

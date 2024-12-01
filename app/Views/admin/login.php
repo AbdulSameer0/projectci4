@@ -43,7 +43,7 @@
                         <h1 class="text-primary">Login</h1>
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="email" name="email" class="form-control" placeholder="Email" id="email"
+                                <input type="text" name="name" class="form-control" placeholder="User Name" id="name"
                                     required="" /> <!-- Added name attribute -->
                             </div>
                             <div class="col-md-12">

@@ -17,3 +17,10 @@ $routes->post('admin/saveDetails', 'Admin::saveDetails');            //form deta
 // $routes->get('admin/deleteDetails/(:num)', 'Admin::deleteDetails/$1');    //from delete action
 $routes->get('admin/delete/(:num)', 'Admin::delete/$1');
 
+$routes->get('admin/register', 'Admin::register');
+$routes->post('admin/register', 'Admin::register');
+
+$routes->post('admin/lockPdf/(:num)', 'Admin::lockPdf/$1');
+
+
+
