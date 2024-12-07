@@ -1,11 +1,10 @@
 <!-- footer content -->
-<footer class="fixed-bottom">
+<footer class="">
     <div class="text-center">
         <span class="font-weight-bold text-secondary">©
-            <a href="https://delhicourts.nic.in/" class="text-secondary" target="_blank">
-                Delhi District Court</a> by
-            <a href="#" class="font-weight-bold text-secondary" target="_blank">IT-Cell (HQs), Tis
-                Hazari.</a>
+            <a href="dashboard" class="text-secondary">
+                Copyright 2024 ||</a> Coding Artist ||
+            <a hre f="#" class="font-weight-bold text-secondary" target="_blank">All Rights Reserved</a>
         </span>
         <!-- ©2016 All Rights Reserved.
         <a href="#"></a> -->
@@ -15,8 +14,27 @@
 <!-- /footer content -->
 </div>
 </div>
-
+<!-- JavaScript Code -->
+<script>
+    // Add JavaScript for Search Filter
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        const searchTerm = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#form_details_table tr');
+        rows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+        });
+    });
+    // Add JavaScript to auto hide the message after 5 seconds
+    setTimeout(function () {
+        let flashMessage = document.getElementById('flashMessage');
+        if (flashMessage) {
+            flashMessage.style.display = 'none';
+        }
+    }, 5000); // 5000ms = 5 seconds
+</script>
 <!-- jQuery -->
+
 <script src="<?php echo base_url("../public/assets/vendors/jquery/dist/jquery.min.js"); ?>"></script>
 <!-- Bootstrap -->
 <script src="<?php echo base_url("../public/assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"); ?>"></script>

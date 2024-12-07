@@ -25,7 +25,6 @@
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url("../public/assets/build/css/custom.min.css"); ?>" rel="stylesheet" />
     <!-- css by ritika -->
-    <!-- <link href="<?php //echo base_url("../public/assets/build/css/sweetalert2.min .css"); ?>" rel="stylesheet" /> -->
     <style>
         .table-responsive {
             max-width: 100%;
@@ -36,6 +35,24 @@
             table-layout: fixed;
             width: 100%;
         }
+
+        .row .dropdown,
+        .row .delete-details {
+            flex: 1;
+            /* This makes sure each div inside the row takes up equal space */
+            text-align: center;
+            /* Optional: Centers the icons */
+        }
+
+        .row .dropdown a,
+        .row .delete-details a {
+            display: block;
+            /* Ensures the anchor tags behave like block elements */
+            width: 100%;
+            /* Makes the icons fill the container */
+            text-align: ;
+            /* Centers the icon */
+        }
     </style>
 </head>
 
@@ -45,11 +62,10 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0">
-                        <a href="index.html" class="site_title"><i class="fa fa-file"></i> <span>Programme</span></a>
+                        <a href="index.html" class="site_title"><i class="fa fa-file"></i> <span>Academy Name</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <br />
-
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
@@ -63,11 +79,8 @@
                         </div>
                     </div>
                     <!-- /sidebar menu -->
-
-
                 </div>
             </div>
-
             <!-- top navigation -->
             <div class="top_nav">
                 <div class="nav_menu">
@@ -83,23 +96,18 @@
                                     <?= ucfirst(session()->get('name')); ?>
                                     <!-- Dynamically display the logged-in user's name with the first letter capitalized -->
                                 </a>
-
-
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#"> Profile</a>
-                                    <a class="dropdown-item" href="#">
-                                        <!-- <span class="badge bg-red pull-right">50%</span> -->
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <!-- <a class="dropdown-item" href="#">
                                         <span>Settings</span>
-                                    </a>
-                                    <a class="dropdown-item" href="#">Help</a>
+                                    </a> -->
+                                    <!-- <a class="dropdown-item" href="#">Help</a> -->
                                     <a class="dropdown-item" href="<?php echo base_url('admin/logout'); ?>"><i
                                             class="fa fa-sign-out pull-right"></i>
                                         Log Out</a>
                                 </div>
                             </li>
-
-
                         </ul>
                     </nav>
                 </div>

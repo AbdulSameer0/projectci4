@@ -9,18 +9,21 @@ use App\Controllers\Pages;
  */
 // $routes->get('/', 'Home::index');    //home page routes
 /************************************************************************************************************************************/
-$routes->get('/', 'Admin::index');                               //login page
-$routes->post('admin/login', 'Admin::login');                      //login action  
-$routes->get('admin/logout', 'Admin::logout');                    // Logout action
-$routes->get('admin/dashboard', 'Admin::dashboard');                  //dashboard page 
-$routes->post('admin/saveDetails', 'Admin::saveDetails');            //form details add here 
-// $routes->get('admin/deleteDetails/(:num)', 'Admin::deleteDetails/$1');    //from delete action
+$routes->get('/', 'Admin::index');                                      //view page of login
+$routes->get('admin/register_view', 'Admin::register_view');            //view page of registration
+$routes->post('admin/registerSubmit', 'Admin::registerSubmit');
+$routes->post('admin/login', 'Admin::login');                           //login action  
+$routes->get('admin/logout', 'Admin::logout');                          // Logout action
+$routes->get('admin/dashboard', 'Admin::dashboard');                    //dashboard page 
+$routes->post('admin/saveDetails', 'Admin::saveDetails');               //save programme form details
+
+
+
+$routes->get('admin/get-data-for-update', 'Admin::getRecord');        // For fetching details
+$routes->post('admin/updateDetails', 'Admin::updateDetails');      // For updating details
+
 $routes->get('admin/delete/(:num)', 'Admin::delete/$1');
 
-$routes->get('admin/register', 'Admin::register');
-$routes->post('admin/register', 'Admin::register');
-
-$routes->post('admin/lockPdf/(:num)', 'Admin::lockPdf/$1');
 
 
 

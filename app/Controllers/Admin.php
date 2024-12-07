@@ -1,28 +1,75 @@
 <?php
 namespace App\Controllers;
 use App\Models\AdminModel;
-use App\Models\ProgrammeModel;
+use App\Models\ProgramModel;
 class Admin extends BaseController
 {
-
-
-    protected $programmeModel;
+    protected $programModel;
+    // controller construct
     public function __construct()
     {
-        $this->programmeModel = new ProgrammeModel();
+        $this->programModel = new ProgramModel();
     }
+    // login view page 
     public function index()
     {
         return view('admin/login');
+    }
+    // registeration view page 
+    public function register_view()
+    {
+        return view('admin/register');
+    }
+    //registration details store function 
+    public function registerSubmit()
+    {
+
+        // Get the form data
+        $name = $this->request->getPost('name');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+
+        // Validate the input data
+        if (
+            !$this->validate([
+                'name' => 'required|min_length[3]|max_length[50]',
+                'email' => 'required|valid_email',
+                'password' => 'required|min_length[6]'
+            ])
+        ) {
+            return redirect()->to('admin/register_view')->withInput()->with('error', $this->validator->getErrors());
+        }
+
+        // Create a new UserModel instance
+        $adminModel = new AdminModel();
+
+        // Check if the email or username is already taken
+        if ($adminModel->isEmailTaken($email)) {
+            return redirect()->to('admin/register_view')->withInput()->with('error', '<i class="fa fa-warning"></i> Email is already taken.');
+        }
+
+        if ($adminModel->isUsernameTaken($name)) {
+            return redirect()->to('admin/register_view')->withInput()->with('error', '<i class="fa fa-warning"></i> Username is already taken.');
+        }
+
+        // Insert the user into the database
+        $adminModel->save([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password // No password hashing in this example
+        ]);
+
+        // Redirect to the login page after successful registration
+        return redirect()->to('/')->with('success', 'Registration successful. Please login.');
     }
     // admin login function
     public function login()
     {
         $session = session();
-        $name = $this->request->getPost('name');
+        $email = $this->request->getPost('name');
         $password = $this->request->getPost('password');
         $model = new AdminModel();
-        $admin = $model->where('name', $name)->first();
+        $admin = $model->where('name', $email)->first();
 
         if ($admin && $admin['password'] === $password) {
             // Store user info in session (you may want to store more than just 'name')
@@ -36,53 +83,24 @@ class Admin extends BaseController
         }
     }
 
-    public function register()
-    {
-        $session = session();
-        if ($this->request->getMethod() === 'post') {
-            $name = $this->request->getPost('name');
-            $email = $this->request->getPost('email');
-            $password = $this->request->getPost('password');
-
-            //  print_r($name);
-//             die;
-            $model = new AdminModel();
-
-            // Check if the username or email already exists
-            $existingUser = $model->where('name', $name)->orWhere('email', $email)->first();
-            if ($existingUser) {
-                $session->setFlashdata('error', '<i class="fa fa-warning"></i> Username or email already exists.');
-                return redirect()->to('/admin/register');
-            }
-
-            // Save the new user to the database
-            $data = [
-                'name' => $name,
-                'email' => $email,
-                'password' => $password, // Consider hashing this for security (e.g., password_hash())
-            ];
-            // print_r($data);
-            // die;
-            $model->insert($data);
-
-            $session->setFlashdata('success', '<i class="fa fa-check-circle"></i> Registration successful. You can now login.');
-            return redirect()->to('/');
-        }
-
-        return view('admin/register'); // Load the registration view
-    }
-
-
-    // admin dashboard function 
     public function dashboard()
     {
-        $test = '';
-        // echo "hh";
-        $this->$test = new AdminModel();
+        helper(['form', 'filesystem']);
+        $model = new ProgramModel();
+        $programmeInfo = $model->orderBy('created_at', 'DESC')->findAll(); // Fetch all rooms records
 
-        $data['prog_data'] = $this->$test->getProgramInfoData();
+        // Format the created_at date to dd/mm/yyyy
+        foreach ($programmeInfo as &$programme) {
+            // Check if the date is empty or null
+            if (empty($programme['date'])) {
+                $programme['date'] = '00/00/0000'; // Default date if not set
+            } else {
+                $programme['date'] = date('d/m/Y', strtotime($programme['date'])); // Format date if available
+            }
+        }
 
-        return view('admin/dashboard', $data);
+        $data['prog_data'] = $programmeInfo;
+        return view('admin/dashboard', $data); // Pass formatted data to the view
     }
     // save details function
     public function saveDetails()
@@ -100,7 +118,6 @@ class Admin extends BaseController
             'materialLink' => $request->getPost('materialLink'),
             'paymentdone' => $request->getPost('paymentdone'),
         ];
-
         // Get the username from the session or request
         $userName = session()->get('name'); // Assuming username is stored in the session
         if (!$userName) {
@@ -111,10 +128,8 @@ class Admin extends BaseController
 
         // File Upload Configuration
         $fileFields = ['progPdf', 'attandancePdf'];
-        $uploadPathProgramsPdf = WRITEPATH . 'uploads/programsPdf/';
-        $uploadPathAttendance = WRITEPATH . 'uploads/attendancePdf/';
-        helper(['form', 'filesystem']);
-
+        $uploadPathProgramsPdf = ROOTPATH . 'uploads/programs_pdf/';
+        $uploadPathAttendance = ROOTPATH . 'uploads/attendance_pdf/';
         foreach ($fileFields as $field) {
             $file = $this->request->getFile($field);
 
@@ -130,20 +145,19 @@ class Admin extends BaseController
                 if ($field == 'progPdf') {
                     // Move the program PDF file to the specified directory and save the relative path
                     $file->move($uploadPathProgramsPdf, $newFileName);
-                    $data[$field] = 'uploads/programsPdf/' . $newFileName; // Save relative file path
+                    $data[$field] = 'uploads/programs_pdf/' . $newFileName; // Save relative file path
                 } elseif ($field == 'attandancePdf') {
                     // Move the attendance PDF file to the specified directory and save the relative path
                     $file->move($uploadPathAttendance, $newFileName);
-                    $data[$field] = 'uploads/attendancePdf/' . $newFileName; // Save relative file path
+                    $data[$field] = 'uploads/attendance_pdf/' . $newFileName; // Save relative file path
                 }
             }
         }
-
         // Save data to the database using the model
-        $programmeModel = new ProgrammeModel();
+        $programModel = new ProgramModel();
         try {
             // Attempt to save the details in the database
-            $result = $programmeModel->saveDetail($data);
+            $result = $programModel->saveDetail($data);
             session()->setFlashdata('success', 'Details Added successfully!');
         } catch (\Exception $e) {
             // Handle exceptions
@@ -155,46 +169,95 @@ class Admin extends BaseController
     }
 
 
-
     // delete details function
     public function delete($prog_id = null)
     {
         // Check if the prog_id is valid
         if ($prog_id === null) {
-            // Redirect with error message if prog_id is not provided
+            // Redirect with an error message if prog_id is not provided
             session()->setFlashdata('error', 'No program ID provided.');
             return redirect()->to(base_url('admin/dashboard'));
         }
 
         // Initialize the model
-        $model = new ProgrammeModel();
+        $model = new ProgramModel();
 
-        // Attempt to delete the record
-        $result = $model->where('prog_id', $prog_id)->delete();
-
-        // Check if deletion was successful
-        if ($result) {
-            // Set success message if deletion was successful
+        // Attempt to delete the record via the model
+        if ($model->deleteDetails($prog_id)) {
+            // Set success message
             session()->setFlashdata('success', 'Details deleted successfully.');
         } else {
-            // Set error message if deletion failed
-            session()->setFlashdata('error', 'Error deleting program.');
+            // Set error message
+            session()->setFlashdata('error', 'Error deleting program. It may not exist.');
         }
 
         // Redirect back to the dashboard
         return redirect()->to(base_url('admin/dashboard'));
     }
 
-    public function lockPdf($prog_id)
+    public function getRecord()
     {
-        // Load model or perform necessary actions
-        $success = $this->ProgrammeModel->lockPdfById($prog_id);
+        // print_r("hh");
+        // die;
+        $id = $this->request->getGet('prog_id');
+        // echo $id;
+        // die;
 
-        if ($success) {
-            return $this->response->setJSON(['message' => 'PDF locked successfully!']);
+        if (!$id) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Programme ID is missing hai bhai :( ']);
         } else {
-            return $this->response->setStatusCode(500)->setJSON(['message' => 'Failed to lock PDF.']);
+            $result = $this->programModel->get_user_details($id);
+            // print_r($result);
+            // die;
+            echo json_encode($result);
         }
+    }
+
+    public function updateDetails()
+    {
+
+        $request = service('request');
+        $id = $this->request->getPost('progid');
+
+        // print_r($id);
+        // die;
+        // Collect form data
+        $data = [
+            'progTitle' => $request->getPost('progTitle'),
+            'targetGroup' => $request->getPost('targetGroup'),
+            'date' => $request->getPost('date'),
+            'progDirector' => $request->getPost('progDirector'),
+            'dealingAsstt' => $request->getPost('dealingAsstt'),
+            'materialLink' => $request->getPost('materialLink'),
+            'paymentdone' => $request->getPost('paymentdone'),
+        ];
+
+        // print_r($data);
+        // die;
+
+        // Get the username from the session or request
+        $userName = session()->get('name'); // Assuming username is stored in the session
+        if (!$userName) {
+            // Handle the case if the username is not available
+            session()->setFlashdata('error', 'User not logged in');
+            return redirect()->to('/dashboard');
+        }
+
+        // print_r($data);
+        // die;
+
+        $programModel = new ProgramModel();
+        try {
+            // Attempt to save the details in the database
+            $result = $programModel->updateDetailsModel($data, $id);
+            session()->setFlashdata('success', 'Details Update successfully!');
+        } catch (\Exception $e) {
+            // Handle exceptions
+            session()->setFlashdata('error', $e->getMessage());
+        }
+
+        // Redirect to the dashboard after saving
+        return redirect()->to('admin/dashboard');
     }
 
 
