@@ -457,8 +457,8 @@
                                             <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
                                             <td><input type="text" class="form-control" id="progTitle_6666"
                                                     name="progTitle" value="" placeholder=""></td>
-                                            <td style="display: none;"><input type="text" class="form-control"
-                                                    id="progid" name="progid" value="" placeholder=""></td>
+                                            <td><input type="text" class="form-control"
+                                                    id="progidd" name="progid" value="" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="progPdf">Programme Schedule in
@@ -608,39 +608,40 @@
         // alert("sameer111");
         var progId = $(this).data('id');
         alert(progId);
+        $("#progidd").val(progId);
         //    alert("progId:" + progId);
 
-        $.ajax({
+        // $.ajax({
 
-            url: '<?php echo base_url() . "/admin/get-data-for-program/" ?>',
-            dataType: 'json',
-            contentType: 'application/json',
-            type: 'GET',
-            data: {
-                prog_id: progId,//all, branch, court, both, individual, deputation & diverted
-            },
+            // url: '<?php //echo base_url() . "/admin/get-data-for-program/" ?>',
+        //     dataType: 'json',
+        //     contentType: 'application/json',
+        //     type: 'GET',
+        //     data: {
+        //         prog_id: progId,//all, branch, court, both, individual, deputation & diverted
+        //     },
 
 
-            beforeSend: function () { },
-            success: function (data) {
-                console.log(data);
-                alert(data[0]['progTitle']);
-                $("#progTitle_6666").val(data[0]['progTitle']);
-                // $("#targetGroup_666").val(data[0]['targetGroup']);
-                // $("#date_666").val(data[0]['date']);
-                // $("#progDirector_666").val(data[0]['progDirector']);
-                // $("#dealingAsstt_666").val(data[0]['dealingAsstt']);
-                $("#progPdf_6666").val(data[0]['progPdf']);
-                // $("#materialLink_666").val(data[0]['materialLink']);
-                // $("#paymentdone_666").val(data[0]['paymentdone']);
+        //     beforeSend: function () { },
+        //     success: function (data) {
+        //         console.log(data);
+        //         alert(data[0]['progTitle']);
+        //         $("#progTitle_6666").val(data[0]['progTitle']);
+        //         // $("#targetGroup_666").val(data[0]['targetGroup']);
+        //         // $("#date_666").val(data[0]['date']);
+        //         // $("#progDirector_666").val(data[0]['progDirector']);
+        //         // $("#dealingAsstt_666").val(data[0]['dealingAsstt']);
+        //         $("#progPdf_6666").val(data[0]['progPdf']);
+        //         // $("#materialLink_666").val(data[0]['materialLink']);
+        //         // $("#paymentdone_666").val(data[0]['paymentdone']);
 
-                $("#progid").val(data[0]['prog_id']);
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        }).done(function (data) {
-        });
+        //         $("#progid").val(data[0]['prog_id']);
+        //     },
+        //     error: function (data) {
+        //         console.log(data);
+        //     }
+        // }).done(function (data) {
+        // });
     });
 
 </script>

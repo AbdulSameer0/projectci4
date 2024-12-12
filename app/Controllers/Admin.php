@@ -357,9 +357,11 @@ class Admin extends BaseController
             'progTitle' => $request->getPost('progTitle'),
             'progPdf' => $request->getPost('progPdf'),
         ];
-
         // print_r($data);
         // die;
+
+
+        
 
         // Get the username from the session or request
         $userName = session()->get('name'); // Assuming username is stored in the session
