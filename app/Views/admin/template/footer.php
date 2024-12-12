@@ -34,7 +34,7 @@
     }, 5000); // 5000ms = 5 seconds
 </script>
 <!-- jQuery -->
-
+<!-- Include SweetAlert JS -->
 <script src="<?php echo base_url("../public/assets/vendors/jquery/dist/jquery.min.js"); ?>"></script>
 <!-- Bootstrap -->
 <script src="<?php echo base_url("../public/assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"); ?>"></script>
@@ -65,7 +65,9 @@
 
 <!-- Custom Theme Scripts -->
 <script src="<?php echo base_url("../public/assets/build/js/custom.min.js"); ?>"></script>
-<!-- <script src="<?php //echo base_url("../public/assets/build/js/sweetalert2.min.js"); ?>"></script> -->
+<!-- sweetalert js file -->
+<script src="<?php echo base_url("../public/assets/build/js/sweetalert2.min.js"); ?>"></script>
+
 </body>
 
 </html>

@@ -56,14 +56,14 @@
                                 Login <i class="fa fa-paper-plane"></i>
                             </button>
                         </div>
-                        <div class="separator">
+                        <!-- <div class="separator">
                             <p class="change_link text-primary">
                                 Are you a new user?
-                                <a href="<?php echo base_url('/admin/register_view'); ?>" class="to_register"> Register
+                                <a href="<?php //echo base_url('/admin/register_view'); ?>" class="to_register"> Register
                                 </a>
                             </p>
                             <br />
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </section>

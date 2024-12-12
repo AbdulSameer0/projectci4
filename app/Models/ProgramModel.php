@@ -18,13 +18,13 @@ class ProgramModel extends Model
         'progDirector',
         'dealingAsstt',
         'progPdf',
-        'attandancePdf',
+        'attendancePdf',
         'materialLink',
         'paymentdone'
     ];
     protected $useTimestamps = true;
 
-    // Method to save the data
+    // Method to save the details
     public function saveDetail($data)
     {
         // print_r('hello');
@@ -52,6 +52,21 @@ class ProgramModel extends Model
             ];
         }
     }
+    // Method to delete the details 
+    public function deleteDetails($prog_id)
+    {
+        // Check if the record exists
+        $program = $this->find($prog_id);
+
+        if ($program) {
+            // If the record exists, delete it
+            return $this->delete($prog_id);
+        }
+
+        // Return false if the record does not exist
+        return false;
+    }
+    // Method to get user details 
     public function get_user_details($prog_id)
     {
         // print_r($prog_id);die;
@@ -67,8 +82,22 @@ class ProgramModel extends Model
         }
     }
 
+    public function getuserProgramRecord($prog_id)
+    {
+       // print_r($prog_id);die;
+        $query = "select prog_id, progTitle,progPdf from programme_info where prog_id = '$prog_id'";
+        // print_r($query);
+        // die;
+        $result = $this->db->query($query);
+        // print_r($result);die;
+        if ($result) {
+            return $result->getResultArray();
+        } else {
+            return false;
+        }
+    }
 
-
+    // Method to update form details 
     public function updateDetailsModel($data, $id)
     {
         // print_r($data);
@@ -88,23 +117,24 @@ class ProgramModel extends Model
         }
     }
 
-
-    public function deleteDetails($prog_id)
+    public function updateProgramRecord($data, $id)
     {
-        // Check if the record exists
-        $program = $this->find($prog_id);
+        // print_r($data);
+        // print_r($id);
+        // die;
 
-        if ($program) {
-            // If the record exists, delete it
-            return $this->delete($prog_id);
+        $query = $this->db->table('projectci4.programme_info');
+        $query->where('prog_id', $id);
+        $query->update($data);
+
+        // $query->insert($data);
+        // print_r($query);die;
+        if ($query) {
+            return TRUE;
+        } else {
+            return FALSE;
         }
-
-        // Return false if the record does not exist
-        return false;
     }
+
 }
-
-
-
-
 

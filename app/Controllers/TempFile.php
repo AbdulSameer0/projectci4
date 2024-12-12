@@ -157,4 +157,89 @@ class TempFile extends BaseController
         return redirect()->to('admin/dashboard');
     }*/
 
+
+    // delete details function
+    // public function delete($prog_id = null)
+    // {
+    //     // Check if the prog_id is valid
+    //     if ($prog_id === null) {
+    //         // Redirect with error message if prog_id is not provided
+    //         session()->setFlashdata('error', 'No program ID provided.');
+    //         return redirect()->to(base_url('admin/dashboard'));
+    //     }
+    //     // Initialize the model
+    //     $model = new ProgramModel();
+
+    //     // Attempt to delete the record
+    //     $result = $model->where('prog_id', $prog_id)->delete();
+
+    //     // Check if deletion was successful
+    //     if ($result) {
+    //         // Set success message if deletion was successful
+    //         session()->setFlashdata('success', 'Details deleted successfully.');
+    //     } else {
+    //         // Set error message if deletion failed
+    //         session()->setFlashdata('error', 'Error deleting program.');
+    //     }
+
+    //     // Redirect back to the dashboard
+    //     return redirect()->to(base_url('admin/dashboard'));
+    // }
+
+    // public function getDetails($prog_id)
+    // {
+    //     $programModel = new ProgramModel();
+    //     $data = $programModel->find($prog_id);
+
+    //     if ($data) {
+    //         return $this->response->setJSON($data);
+    //     } else {
+    //         return $this->response->setJSON(['status' => false, 'message' => 'Record not found']);
+    //     }
+    // }
+
+    // public function getRecordDetails()
+    // {
+    //     print_r("sameer");
+    //     die;
+    //     $prog_id = $this->request->getPost('prog_id');
+
+    //     if (!$prog_id) {
+    //         return $this->response->setJSON([
+    //             'status' => 'error',
+    //             'message' => 'Invalid request. Programme ID is missing.',
+    //         ]);
+    //     }
+
+    //     $record = $this->programModel->find($prog_id);
+
+    //     if ($record) {
+    //         return $this->response->setJSON([
+    //             'status' => 'success',
+    //             'data' => $record,
+    //         ]);
+    //     } else {
+    //         return $this->response->setJSON([
+    //             'status' => 'error',
+    //             'message' => 'Record not found.',
+    //         ]);
+    //     }
+    // }
+    public function updateRecord()
+    {
+        // print_r("hh");
+        // die;
+        $id = $this->request->getGet('prog_id');
+        // echo $id;
+        // die;
+        if (!$id) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Programme ID is missing hai bhai :( ']);
+        } else {
+            $result = $this->programModel->get_user_details($id);
+            // print_r($result);
+            // die;
+            echo json_encode($result);
+        }
+    }
+
 }

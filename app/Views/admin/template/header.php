@@ -24,6 +24,8 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url("../public/assets/build/css/custom.min.css"); ?>" rel="stylesheet" />
+    <!-- sweetalert css file -->
+    <link href="<?php echo base_url("../public/assets/build/css/sweetalert2.min.css"); ?>" rel="stylesheet" />
     <!-- css by ritika -->
     <style>
         .table-responsive {
@@ -69,11 +71,15 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <!-- <h3>General</h3> -->
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-home"></i> Home
-                                        <!-- <span class="fa fa-chevron-down"></span></a> -->
+                                    <a href="<?php echo base_url('admin/dashboard'); ?>"><i class="fa fa-home"></i> Home
+                                        <!-- <span class="fa fa-chevron-down"></span></a> --></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('/admin/register'); ?>">
+                                        <i class="fa fa-user"></i> Registration</a>
                                 </li>
                             </ul>
                         </div>
