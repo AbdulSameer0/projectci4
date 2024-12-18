@@ -42,19 +42,7 @@
                         <?php endif; ?>
                     </div>
 
-                    <!-- success and error messages  -->
-                    <!-- <div class="title float-right mb-2 mt-2" id="flashMessage">
-                        <?php //if (session()->getFlashdata('success')): ?>
-                            <span class="alert alert-success"><i class="fa fa-check"></i>
-                                <?//= session()->getFlashdata('success') ?>
-                            </span>
-                        <?php //endif; ?>
-                        <?php //if (session()->getFlashdata('error')): ?>
-                            <span class="alert alert-danger"><i class="fa fa-warning"></i>
-                                <?//= session()->getFlashdata('error') ?>
-                            </span>
-                        <?php //endif; ?>
-                    </div> -->
+
                     <div class="mb-1">
                         <div class="add-details mt-1">
                             <button type="submit" class="btn btn-primary float-right mt-0 mb-0" data-toggle="modal"
@@ -133,7 +121,7 @@
                                                                 class="badge badge-pill badge-success text-white"
                                                                 href="<?= base_url("public/uploads/programsPdf/" . $key['progPdf']); ?>"
                                                                 target="_blank">
-                                                                <?= pathinfo($key['progPdf'], PATHINFO_FILENAME) . ' by ' . $userName . '.' . pathinfo($key['progPdf'], PATHINFO_EXTENSION); ?>
+                                                                <?= pathinfo($key['progPdf'], PATHINFO_FILENAME) . ' by ' . $userName ?>
                                                             </a>
                                                         </td>
 
@@ -166,7 +154,7 @@
                                                                         aria-expanded="false">
                                                                         <i class="fa fa-bars fa-lg text-primary"></i>
                                                                     </a>
-                                                                    <!-- edit details  -->
+                                                                    <!-- edit details -->
                                                                     <div class="dropdown-menu mr-5"
                                                                         aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item text-danger edit_btn"
@@ -175,8 +163,7 @@
                                                                             data-id="<?php echo $key['prog_id']; ?>"
                                                                             value="<?php echo $key['prog_id']; ?>"
                                                                             title="Edit Details">
-                                                                            <i class="fa fa-edit"></i> Edit
-                                                                            Details
+                                                                            <i class="fa fa-edit"></i> Edit Details
                                                                         </a>
                                                                         <!-- edit prog. Schedule pdf -->
                                                                         <a class="dropdown-item text-danger edit_btn_pdf"
@@ -185,27 +172,29 @@
                                                                             data-id="<?php echo $key['prog_id']; ?>"
                                                                             value="<?php echo $key['prog_id']; ?>"
                                                                             title="Edit program pdf">
-
                                                                             <i class="fa fa-file-pdf-o"></i> Edit Prog.
                                                                             Schedule(pdf)
                                                                         </a>
                                                                         <!-- edit attendance Schedule pdf -->
-                                                                        <a class="dropdown-item text-danger" href="#"
-                                                                            data-toggle="modal"
-                                                                            data-target="#edit_attendance_pdf_Modal">
+                                                                        <a class="dropdown-item text-danger edit_btn_pdf1"
+                                                                            href="#" data-toggle="modal"
+                                                                            data-target="#edit_attendance_pdf_Modal"
+                                                                            data-id="<?php echo $key['prog_id']; ?>"
+                                                                            value="<?php echo $key['prog_id']; ?>"
+                                                                            title="Edit Attendance pdf">
                                                                             <i class="fa fa-file-pdf-o"></i> Edit
                                                                             Attendance(pdf)
                                                                         </a>
                                                                         <!-- lock pdf details -->
-                                                                        <a class="dropdown-item text-danger" href="#"
-                                                                            data-toggle="modal" data-target="#lockPdfModal">
+                                                                        <a class="dropdown-item text-danger lock-btn" href="#"
+                                                                            onclick="lockActions('<?php echo $key['prog_id']; ?>')">
                                                                             <i class="fa fa-lock"></i> Lock Details
                                                                         </a>
                                                                         <!-- delete details -->
-                                                                        <a class="dropdown-item text-danger"
-                                                                            href="<?php echo base_url("admin/delete/" . $key['prog_id']); ?>">
-                                                                            <i class="fa fa-trash delete-btn"
-                                                                                name="prog_id"></i> Delete details
+                                                                        <a class="dropdown-item text-danger delete-btn" href="#"
+                                                                            onclick="confirmDelete('<?php echo base_url('admin/delete/' . $key['prog_id']); ?>');">
+                                                                            <i class="fa fa-trash" name="prog_id"></i> Delete
+                                                                            details
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -441,7 +430,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #2A3F54;">
-                            <h5 class="modal-title text-white" id="editProgramPdfModalLabel">Edit Program Schedule PDF
+                            <h5 class="modal-title text-white" id="editProgramPdfModalLabel">Edit Program Schedule
                                 <i class="fa fa-file-pdf-o"></i>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -451,21 +440,30 @@
                         <div class="modal-body">
                             <div class="form-area custom-background">
                                 <form id="edit_form_details"
-                                    action="<?php echo base_url('/admin/updateProgramRecord'); ?>" method="POST">
+                                    action="<?php echo base_url('/admin/updateProgramRecord'); ?>" method="POST"
+                                    enctype="multipart/form-data">
                                     <table class="table table-bordered">
                                         <tr>
                                             <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
-                                            <td><input type="text" class="form-control" id="progTitle_6666"
+                                            <td><input type="text" class="form-control" id="progTitle_id"
                                                     name="progTitle" value="" placeholder=""></td>
-                                            <td><input type="text" class="form-control"
+                                            <td style="display: none;"><input type="text" class="form-control"
                                                     id="progidd" name="progid" value="" placeholder=""></td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 30%;"><label for="progPdf">Programme Schedule in
+                                            <td style="width: 30%;"><label for="progPdf_11">Programme Schedule in
                                                     PDF</label>
                                             </td>
                                             <td><input type="file" class="mt-2 text-primary" id="progPdf_666"
                                                     name="progPdf">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 30%;"><label for="attandancePdf">Attendance in
+                                                    PDF</label>
+                                            </td>
+                                            <td><input type="file" class="mt-2 text-primary" id="attendancePdf"
+                                                    name="attendancePdf">
                                             </td>
                                         </tr>
                                     </table>
@@ -485,11 +483,11 @@
             <!-- /end program (pdf)  -->
             <!-- edit attendance(pdf) details modal -->
             <!-- <div class="modal fade" id="edit_attendance_pdf_Modal" tabindex="-1" role="dialog"
-                aria-labelledby="editAttendancePdfModalLabel" aria-hidden="true">
+                aria-labelledby="editProgramPdfModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #2A3F54;">
-                            <h5 class="modal-title text-white" id="editAttendancePdfModalLabel">Edit Attendance PDF
+                            <h5 class="modal-title text-white" id="editProgramPdfModalLabel">Edit Attendance Pdf 
                                 <i class="fa fa-file-pdf-o"></i>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -498,12 +496,15 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-area custom-background">
-                                <form id="edit_form_details" action="<?php //echo base_url('/admin/edit_attendance_pdf'); ?>" method="POST">
+                                <form id="edit_form_details"
+                                    action="<?php echo base_url('/admin/updateProgramRecord'); ?>" method="POST">
                                     <table class="table table-bordered">
                                         <tr>
                                             <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
-                                            <td><input type="text" class="form-control" id="progTitle" name="progTitle"
-                                                    value="Demo" placeholder=""></td>
+                                            <td><input type="text" class="form-control" id="progTitle_id"
+                                                    name="progTitle" value="" placeholder=""></td>
+                                            <td style="display: none;"><input type="text" class="form-control"
+                                                    id="progidd" name="progid" value="" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="attandancePdf">Attendance in
@@ -514,6 +515,7 @@
                                             </td>
                                         </tr>
                                     </table>
+
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -526,35 +528,7 @@
                     </div>
                 </div>
             </div> -->
-            <!-- /end program (pdf)  -->
-            <!-- lock Pdf modal -->
-            <!-- <div class="modal fade" id="lockPdfModal" tabindex="-1" role="dialog" aria-labelledby="lockPdfModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #d9534f;">
-                            <h5 class="modal-title text-white" id="lockPdfModalLabel">Lock PDF</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="text-center text-danger">
-                                <strong>Are you sure you want to lock this PDF?</strong>
-                            </p>
-                            <p class="text-center text-muted text-warning">
-                                Once your locked, the PDF cannot be modified or changed.
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> 
-                         <a href="<? php// echo base_url('/admin/lockDetails' . $key['prog_id']); ?>" type="submit"
-                                class="btn btn-danger" id="lockDetailsBtn">Lock PDF</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- /lock Pdf modal -->
+            <!-- /end attendance (pdf)  -->
         </div>
     </div>
 </div>
@@ -605,56 +579,226 @@
 <script>
     $(".edit_btn_pdf").click(function () {
 
-        // alert("sameer111");
+        alert("sameer111");
         var progId = $(this).data('id');
-        alert(progId);
+        //  alert(progId);
         $("#progidd").val(progId);
-        //    alert("progId:" + progId);
+        // $("#progTitle").val(progTitle);
 
-        // $.ajax({
+        alert("progId:" + progId);
 
-            // url: '<?php //echo base_url() . "/admin/get-data-for-program/" ?>',
-        //     dataType: 'json',
-        //     contentType: 'application/json',
-        //     type: 'GET',
-        //     data: {
-        //         prog_id: progId,//all, branch, court, both, individual, deputation & diverted
-        //     },
+        $.ajax({
+
+            url: '<?php echo base_url() . "/admin/get-data-for-program/" ?>',
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'GET',
+            data: {
+                prog_id: progId,//all, branch, court, both, individual, deputation & diverted
+            },
 
 
-        //     beforeSend: function () { },
-        //     success: function (data) {
-        //         console.log(data);
-        //         alert(data[0]['progTitle']);
-        //         $("#progTitle_6666").val(data[0]['progTitle']);
-        //         // $("#targetGroup_666").val(data[0]['targetGroup']);
-        //         // $("#date_666").val(data[0]['date']);
-        //         // $("#progDirector_666").val(data[0]['progDirector']);
-        //         // $("#dealingAsstt_666").val(data[0]['dealingAsstt']);
-        //         $("#progPdf_6666").val(data[0]['progPdf']);
-        //         // $("#materialLink_666").val(data[0]['materialLink']);
-        //         // $("#paymentdone_666").val(data[0]['paymentdone']);
-
-        //         $("#progid").val(data[0]['prog_id']);
-        //     },
-        //     error: function (data) {
-        //         console.log(data);
-        //     }
-        // }).done(function (data) {
-        // });
+            beforeSend: function () { },
+            success: function (data) {
+                console.log(data);
+                //     alert(data[0]['progid']);
+                $("#progTitle_id").val(data[0]['progTitle']);
+                $("#progid").val(data[0]['prog_id']);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        }).done(function (data) {
+        });
     });
 
 </script>
-<!-- <script>
-    $('#lockPdfModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var progId = button.data('prog-id'); // Extract prog_id from data-* attributes
 
-        // Update the modal action with the correct prog_id
-        var modal = $(this);
-        modal.find('#lockDetailsBtn').attr('href', '<?= base_url("admin/lockDetails/"); ?>' + progId);
+<script>
+    $(".edit_btn_pdf1").click(function () {
+
+        alert("sameer111");
+        var progId = $(this).data('id');
+        //  alert(progId);
+        $("#progidd").val(progId);
+        // $("#progTitle").val(progTitle);
+
+        alert("progId:" + progId);
+
+        $.ajax({
+
+            url: '<?php echo base_url() . "/admin/get-data-for-program/" ?>',
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'GET',
+            data: {
+                prog_id: progId,//all, branch, court, both, individual, deputation & diverted
+            },
+
+
+            beforeSend: function () { },
+            success: function (data) {
+                console.log(data);
+                //     alert(data[0]['progid']);
+                $("#progTitle_id").val(data[0]['progTitle']);
+                $("#progid").val(data[0]['prog_id']);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        }).done(function (data) {
+        });
     });
-</script> -->
+
+</script>
+
+<script>
+    // Key to store locked state in localStorage
+    const LOCK_STORAGE_KEY = 'lockedActions';
+
+    // Initialize locked actions on page load
+    document.addEventListener('DOMContentLoaded', function () {
+        const lockedActions = JSON.parse(localStorage.getItem(LOCK_STORAGE_KEY)) || [];
+
+        // Disable locked actions
+        lockedActions.forEach(progId => {
+            disableDropdownActions(progId);
+        });
+    });
+
+    // Function to lock actions for a specific prog_id
+    function lockActions(progId) {
+        // Retrieve current locked state
+        let lockedActions = JSON.parse(localStorage.getItem(LOCK_STORAGE_KEY)) || [];
+
+        // Check if the row is already locked
+        if (lockedActions.includes(progId)) {
+            Swal.fire({
+                icon: 'info',
+                title: 'Already Locked',
+                text: 'This actions is already locked. Locked actions cannot be changed or modified.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#3085d6'
+            });
+            return; // Exit the function if already locked
+        }
+
+        // Show confirmation dialog before locking actions
+        Swal.fire({
+            icon: 'warning',
+            title: 'Confirm Lock',
+            text: 'Are you sure you want to lock these actions? Locked actions cannot be changed or modified.',
+            showCancelButton: true, // Enable the Cancel button
+            confirmButtonText: 'Yes, Lock it!',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#3085d6', // Blue for confirm
+            cancelButtonColor: '#d33' // Red for cancel
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If user confirms, lock the actions
+                lockedActions.push(progId);
+                localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(lockedActions));
+                disableDropdownActions(progId);
+
+                // Show feedback message after locking
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Details Locked',
+                    text: 'If all actions are locked, they cannot be changed or modified.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#3085d6'
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // Optional: Add logic if the user cancels, e.g., show a canceled message
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Action Canceled',
+                    text: 'No changes have been made.',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            }
+        });
+    }
+
+
+
+    // Function to disable dropdown actions for a specific prog_id
+    function disableDropdownActions(progId) {
+        const dropdownMenu = document.querySelectorAll(`.dropdown-menu [data-id="${progId}"]`);
+        dropdownMenu.forEach(item => {
+            item.classList.add('disabled');
+            item.setAttribute('aria-disabled', 'true');
+            item.removeAttribute('href'); // Disable the href to prevent navigation
+        });
+
+        // Disable delete action explicitly
+        const deleteBtn = document.querySelector(`.dropdown-menu .delete-btn[href*="${progId}"]`);
+        if (deleteBtn) {
+            deleteBtn.classList.add('disabled');
+            deleteBtn.setAttribute('aria-disabled', 'true');
+            deleteBtn.removeAttribute('href');
+        }
+        // Disable delete action explicitly
+        const lockBtn = document.querySelector(`.dropdown-menu .lock-btn[href*="${progId}"]`);
+        if (lockBtn) {
+            lockBtn.classList.add('disabled');
+            lockBtn.setAttribute('aria-disabled', 'true');
+            lockBtn.removeAttribute('href');
+        }
+    }
+
+    // Function to unlock actions (optional, for reset functionality)
+    function unlockActions(progId) {
+        // Retrieve current locked state
+        let lockedActions = JSON.parse(localStorage.getItem(LOCK_STORAGE_KEY)) || [];
+        lockedActions = lockedActions.filter(id => id !== progId); // Remove the progId
+        localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(lockedActions));
+
+        // Re-enable dropdown actions
+        const dropdownMenu = document.querySelectorAll(`.dropdown-menu [data-id="${progId}"]`);
+        dropdownMenu.forEach(item => {
+            item.classList.remove('disabled');
+            item.removeAttribute('aria-disabled');
+            item.setAttribute('href', '#'); // Restore href
+        });
+
+        // Re-enable delete action explicitly
+        const deleteBtn = document.querySelector(`.dropdown-menu .delete-btn[href*="${progId}"]`);
+        if (deleteBtn) {
+            deleteBtn.classList.remove('disabled');
+            deleteBtn.removeAttribute('aria-disabled');
+            deleteBtn.setAttribute('href', '<?php echo base_url("admin/delete/"); ?>' + progId);
+        }
+    }
+</script>
+
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url; // Redirect to the delete URL
+            }
+        });
+    }
+</script>
+
+<style>
+    .dropdown-item.disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+</style>
+
+
 
 
 <?php include('template/footer.php'); ?>
