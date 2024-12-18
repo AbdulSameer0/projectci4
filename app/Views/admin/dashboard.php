@@ -118,9 +118,13 @@
                                                             $userName = $session->get('name');
                                                             ?>
                                                             <a style="word-wrap: break-word; white-space: normal;"
-                                                                class="badge badge-pill badge-success text-white"
-                                                                href="<?= base_url("public/uploads/programsPdf/" . $key['progPdf']); ?>"
-                                                                target="_blank">
+                                                                class="badge badge-pill badge-success text-white" href="<?php
+                                                                $pdfPath = "public/uploads/programsPdf/" . $key['progPdf'];
+                                                                if (!file_exists($pdfPath)) {
+                                                                    $pdfPath = "public/uploads/updateProgramsPdf/" . $key['progPdf'];
+                                                                }
+                                                                echo base_url($pdfPath);
+                                                                ?>" target="_blank">
                                                                 <?= pathinfo($key['progPdf'], PATHINFO_FILENAME) . ' by ' . $userName ?>
                                                             </a>
                                                         </td>
@@ -128,10 +132,16 @@
                                                         <!-- Attendance PDF Link with Username -->
                                                         <td class="text-center text-capitalize text-wrap">
                                                             <a style="word-wrap: break-word; white-space: normal;"
-                                                                class="badge badge-pill badge-success text-white"
-                                                                href="<?= base_url("public/uploads/attendancePdf/" . $key['attendancePdf']); ?>"
-                                                                target="_blank">
-                                                                <?= basename($key['attendancePdf']); ?></a>
+                                                                class="badge badge-pill badge-success text-white" href="<?php
+                                                                $attendancePdfPath = "public/uploads/attendancePdf/" . $key['attendancePdf'];
+                                                                if (!file_exists($attendancePdfPath)) {
+                                                                    $attendancePdfPath = "public/uploads/updateAttendancePdf/" . $key['attendancePdf'];
+                                                                }
+                                                                echo base_url($attendancePdfPath);
+                                                                ?>" target="_blank">
+                                                                <?= basename($key['attendancePdf']); ?>
+                                                            </a>
+
                                                         </td>
                                                         <td class="text-center text-success"
                                                             style="word-wrap: break-word; white-space: normal;">
@@ -446,7 +456,7 @@
                                         <tr>
                                             <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
                                             <td><input type="text" class="form-control" id="progTitle_id"
-                                                    name="progTitle" value="" placeholder=""></td>
+                                                    name="progTitle" value="" placeholder="" readonly></td>
                                             <td style="display: none;"><input type="text" class="form-control"
                                                     id="progidd" name="progid" value="" placeholder=""></td>
                                         </tr>
@@ -482,12 +492,13 @@
             </div>
             <!-- /end program (pdf)  -->
             <!-- edit attendance(pdf) details modal -->
-            <!-- <div class="modal fade" id="edit_attendance_pdf_Modal" tabindex="-1" role="dialog"
+
+            <div class="modal fade" id="edit_attendance_pdf_Modal" tabindex="-1" role="dialog"
                 aria-labelledby="editProgramPdfModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #2A3F54;">
-                            <h5 class="modal-title text-white" id="editProgramPdfModalLabel">Edit Attendance Pdf 
+                            <h5 class="modal-title text-white" id="editProgramPdfModalLabel">Edit Program Schedule
                                 <i class="fa fa-file-pdf-o"></i>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -497,14 +508,23 @@
                         <div class="modal-body">
                             <div class="form-area custom-background">
                                 <form id="edit_form_details"
-                                    action="<?php echo base_url('/admin/updateProgramRecord'); ?>" method="POST">
+                                    action="<?php echo base_url('/admin/updateProgramRecord'); ?>" method="POST"
+                                    enctype="multipart/form-data">
                                     <table class="table table-bordered">
                                         <tr>
                                             <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
                                             <td><input type="text" class="form-control" id="progTitle_id"
-                                                    name="progTitle" value="" placeholder=""></td>
+                                                    name="progTitle" value="" placeholder="" readonly></td>
                                             <td style="display: none;"><input type="text" class="form-control"
                                                     id="progidd" name="progid" value="" placeholder=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 30%;"><label for="progPdf_11">Programme Schedule in
+                                                    PDF</label>
+                                            </td>
+                                            <td><input type="file" class="mt-2 text-primary" id="progPdf_666"
+                                                    name="progPdf">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="attandancePdf">Attendance in
@@ -527,8 +547,7 @@
 
                     </div>
                 </div>
-            </div> -->
-            <!-- /end attendance (pdf)  -->
+            </div>
         </div>
     </div>
 </div>
@@ -617,7 +636,7 @@
 <script>
     $(".edit_btn_pdf1").click(function () {
 
-        alert("sameer111");
+        alert("sameer222");
         var progId = $(this).data('id');
         //  alert(progId);
         $("#progidd").val(progId);
@@ -627,7 +646,7 @@
 
         $.ajax({
 
-            url: '<?php echo base_url() . "/admin/get-data-for-program/" ?>',
+            url: '<?php echo base_url() . "/admin/get-data-for-program1/" ?>',
             dataType: 'json',
             contentType: 'application/json',
             type: 'GET',

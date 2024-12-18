@@ -361,13 +361,13 @@ class Admin extends BaseController
             $originalProgFileName = $prog_pdf->getName();
             $progFileExtension = $prog_pdf->getExtension();
             $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;       //(. ' by ' . $userName)
-            $prog_pdf->move('public/uploads/programsPdf', $newProgFileName);
+            $prog_pdf->move('public/uploads/updateProgramsPdf', $newProgFileName);
             $data['progPdf'] = $newProgFileName; 
             
             $originalProgFileName = $attendancePdf->getName();
             $progFileExtension = $attendancePdf->getExtension();
             $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;       //(. ' by ' . $userName)
-            $attendancePdf->move('public/uploads/attendancePdf', $newProgFileName);
+            $attendancePdf->move('public/uploads/updateAttendancePdf', $newProgFileName);
             $data['attendancePdf'] = $newProgFileName;  
         
         // Ensure at least one file was successfully uploaded
