@@ -42,7 +42,7 @@
                         <?php endif; ?>
                     </div>
 
-
+                    <!-- success and error messages  -->
                     <div class="mb-1">
                         <div class="add-details mt-1">
                             <button type="submit" class="btn btn-primary float-right mt-0 mb-0" data-toggle="modal"
@@ -77,9 +77,11 @@
                                                     Assitant</th>
                                                 <th class="text-center" style="width:25%;">Programme<br>
                                                     Schedule<br>
-                                                    (In pdf)</th>
+                                                    <span class="text-danger">(Pdf)</span>
+                                                </th>
                                                 <th class="text-center" style="width:25%;">Attendance<br>
-                                                    (In pdf)</th>
+                                                    <span class="text-danger">(Pdf)</span>
+                                                </th>
                                                 <th class="text-center" style="width:25%;">Reading<br>
                                                     matrial</th>
                                                 <th class="text-center" style="width:10%;">Payment Done</th>
@@ -98,7 +100,7 @@
                                                         <td class="text-center text-capitalize text-wrap">
                                                             <?php echo $key['progTitle']; ?>
                                                         </td>
-                                                        <td c class="text-center text-capitalize text-wrap">
+                                                        <td class="text-center text-capitalize text-wrap">
                                                             <?php echo $key['targetGroup']; ?>
                                                         </td>
                                                         <td class="text-center text-capitalize text-wrap">
@@ -110,39 +112,57 @@
                                                         <td class="text-center text-capitalize text-wrap">
                                                             <?php echo $key['dealingAsstt']; ?>
                                                         </td>
-                                                        <!-- Programme PDF Link with Username -->
-
+                                                        <!-- programs pdf -->
                                                         <td class="text-center text-capitalize text-wrap">
-                                                            <?php
-                                                            $session = session();  // Get the session object
-                                                            $userName = $session->get('name');
-                                                            ?>
-                                                            <a style="word-wrap: break-word; white-space: normal;"
-                                                                class="badge badge-pill badge-success text-white" href="<?php
-                                                                $pdfPath = "public/uploads/programsPdf/" . $key['progPdf'];
-                                                                if (!file_exists($pdfPath)) {
-                                                                    $pdfPath = "public/uploads/updateProgramsPdf/" . $key['progPdf'];
-                                                                }
-                                                                echo base_url($pdfPath);
-                                                                ?>" target="_blank">
-                                                                <?= pathinfo($key['progPdf'], PATHINFO_FILENAME) . ' by ' . $userName ?>
-                                                            </a>
+                                                            <?php if (!empty($key['progPdf'])): ?>
+                                                                <button type="button" class="btn btn-outline-primary" style="padding:
+                                                                        8px 16px; font-size: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0,
+                                                                        0.1);"
+                                                                    onclick="window.open('<?= base_url('public/uploads/programsPdf/' . $key['progPdf']); ?>', '_blank');"
+                                                                    title="Click to view the PDF">
+                                                                    View PDF <i class="fa fa-eye"></i>
+                                                                </button>
+                                                                <br>
+                                                                <?php
+                                                                // Extract the username from the file name
+                                                                $fileName = $key['progPdf'];
+                                                                $fileParts = explode(' by ', $fileName); // Split the filename at ' by '
+                                                                $uploadedBy = isset($fileParts[1]) ? $fileParts[1] : 'Unknown'; // Extract username or set as 'Unknown'
+                                                                ?>
+                                                                <span class="text-info">
+                                                                    <?= 'uploaded by ' . $uploadedBy; ?>
+                                                                </span>
+                                                            <?php else: ?>
+                                                                <span class="text-danger font-italic">No PDF Available</span>
+                                                                <br>
+                                                            <?php endif; ?>
                                                         </td>
-
-                                                        <!-- Attendance PDF Link with Username -->
+                                                        <!-- /programs pdf end -->
+                                                        <!-- attendance pdf -->
                                                         <td class="text-center text-capitalize text-wrap">
-                                                            <a style="word-wrap: break-word; white-space: normal;"
-                                                                class="badge badge-pill badge-success text-white" href="<?php
-                                                                $attendancePdfPath = "public/uploads/attendancePdf/" . $key['attendancePdf'];
-                                                                if (!file_exists($attendancePdfPath)) {
-                                                                    $attendancePdfPath = "public/uploads/updateAttendancePdf/" . $key['attendancePdf'];
-                                                                }
-                                                                echo base_url($attendancePdfPath);
-                                                                ?>" target="_blank">
-                                                                <?= basename($key['attendancePdf']); ?>
-                                                            </a>
-
+                                                            <?php if (!empty($key['attendancePdf'])): ?>
+                                                                <button type="button" class="btn btn-outline-primary"
+                                                                    style="padding: 8px 16px; font-size: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+                                                                    onclick="window.open('<?= base_url('public/uploads/attendancePdf/' . $key['attendancePdf']); ?>', '_blank');"
+                                                                    title="Click to view the PDF">
+                                                                    View PDF <i class="fa fa-eye"></i>
+                                                                </button>
+                                                                <br>
+                                                                <?php
+                                                                // Extract the username from the file name
+                                                                $fileName = $key['attendancePdf'];
+                                                                $fileParts = explode(' by ', $fileName); // Split the filename at ' by '
+                                                                $uploadedBy = isset($fileParts[1]) ? $fileParts[1] : 'Unknown'; // Extract username or set as 'Unknown'
+                                                                ?>
+                                                                <span class="text-info">
+                                                                    <?= 'uploaded by ' . $uploadedBy; ?>
+                                                                </span>
+                                                            <?php else: ?>
+                                                                <span class="text-danger font-italic">No PDF Available</span>
+                                                                <br>
+                                                            <?php endif; ?>
                                                         </td>
+                                                        <!-- /attendance pdf end -->
                                                         <td class="text-center text-success"
                                                             style="word-wrap: break-word; white-space: normal;">
                                                             <a href="<?php echo $key['materialLink']; ?>" target="_blank">
@@ -167,7 +187,7 @@
                                                                     <!-- edit details -->
                                                                     <div class="dropdown-menu mr-5"
                                                                         aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item text-danger edit_btn"
+                                                                        <a class="dropdown-item text-primary edit_btn"
                                                                             id="edit_btn" href="#" data-toggle="modal"
                                                                             data-target="#editDetailsModal"
                                                                             data-id="<?php echo $key['prog_id']; ?>"
@@ -176,7 +196,7 @@
                                                                             <i class="fa fa-edit"></i> Edit Details
                                                                         </a>
                                                                         <!-- edit prog. Schedule pdf -->
-                                                                        <a class="dropdown-item text-danger edit_btn_program"
+                                                                        <a class="dropdown-item text-primary edit_btn_program"
                                                                             data-toggle="modal"
                                                                             data-target="#edit_program_pdf_Modal"
                                                                             data-id="<?php echo $key['prog_id']; ?>"
@@ -186,7 +206,7 @@
                                                                             Schedule(pdf)
                                                                         </a>
                                                                         <!-- edit attendance Schedule pdf -->
-                                                                        <a class="dropdown-item text-danger edit_btn_attendance"
+                                                                        <a class="dropdown-item text-primary edit_btn_attendance"
                                                                             href="#" data-toggle="modal"
                                                                             data-target="#edit_attendance_pdf_Modal"
                                                                             data-id="<?php echo $key['prog_id']; ?>"
@@ -196,20 +216,29 @@
                                                                             Attendance(pdf)
                                                                         </a>
                                                                         <!-- lock pdf details -->
-                                                                        <a class="dropdown-item text-danger lock-btn" href="#"
+                                                                        <a class="dropdown-item text-primary lock-btn" href="#"
                                                                             onclick="lockActions('<?php echo $key['prog_id']; ?>')">
                                                                             <i class="fa fa-lock"></i> Lock Details
                                                                         </a>
                                                                         <!-- delete details -->
-                                                                        <a class="dropdown-item text-danger delete-btn" href="#"
+                                                                        <a class="dropdown-item text-primary delete-btn"
+                                                                            href="#"
                                                                             onclick="confirmDelete('<?php echo base_url('admin/delete/' . $key['prog_id']); ?>');">
-                                                                            <i class="fa fa-trash" name="prog_id"></i> Delete
+                                                                            <i class="fa fa-trash"></i> Delete
                                                                             details
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                        <style>
+                                                            .dropdown-item.disabled {
+                                                                color: #ccc;
+                                                                /* Light gray color to indicate disabled state */
+                                                                pointer-events: none;
+                                                                /* Prevent interactions */
+                                                            }
+                                                        </style>
                                                     </tr>
                                                 <?php }
                                         } else { ?>
@@ -235,11 +264,9 @@
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #2A3F54;">
                             <h5 class="modal-title text-white" id="addDetailsModalLabel">Add Details</h5>
-                            <button type="button" class="close close-white text-color-red" data-dismiss="modal"
-                                aria-label="Close">
-                                <span aria-hidden="true">×</span>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                             </button>
-
                         </div>
                         <div class="modal-body">
                             <div class="form-area custom-background">
@@ -324,7 +351,6 @@
                                             </td>
                                         </tr>
                                     </table>
-
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -370,7 +396,6 @@
                                                     <option value="TG-2">TG-2</option>
                                                     <option value="TG-3">TG-3</option>
                                                 </select>
-
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="date">Date</label></td>
@@ -402,13 +427,29 @@
                                                 </select>
                                             </td>
                                         </tr>
-
+                                        <!-- <tr>
+                                            <td style="width: 30%;"><label for="progPdf">Programme Schedule in
+                                                    PDF</label>
+                                            </td>
+                                            <td><input type="file" class="mt-2 text-primary" id="progPdf_666"
+                                                    name="progPdf_edit">
+                                            </td>
+                                        </tr> -->
+                                        <!-- <tr>
+                                            <td style="width: 30%;"><label for="attandancePdf">Attendance in
+                                                    PDF</label>
+                                            </td>
+                                            <td><input type="file" class="mt-2 text-primary" id="attandancePdf"
+                                                    name="attandancePdf">
+                                            </td>
+                                        </tr> -->
                                         <tr>
                                             <td style="width: 30%;"><label for="materialLink">Reading Material
                                                     Link</label>
                                             </td>
                                             <td><input type="text" class="form-control" id="materialLink_666"
                                                     name="materialLink" value="" placeholder=""></td>
+                                            <!-- <input class="form-control" id="materialLink_666" name="materialLink"></td> -->
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="paymentdone">Payment Done</label></td>
@@ -422,7 +463,6 @@
                                         </tr>
                                         <tr></tr>
                                     </table>
-
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -541,23 +581,21 @@
 
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-</div>
 <!-- JQUERY.MIN.JS v-3.7.1 created by ritika  -->
 <script src="<?php echo base_url("../public/assets/build/js/jquery.min.js"); ?>"></script>
+<!-- details edit script  -->
 <script>
     $(".edit_btn").click(function () {
-
         // alert("sameer");
         var progId = $(this).data('id');
         // alert(progId);
         // alert("progId:" + progId);
-
         $.ajax({
-
             url: '<?php echo base_url() . "/admin/get-data-for-update/" ?>',
             dataType: 'json',
             contentType: 'application/json',
@@ -577,7 +615,6 @@
                 // $("#progPdf_666").val(data[0]['progPdf']);
                 $("#materialLink_666").val(data[0]['materialLink']);
                 $("#paymentdone_666").val(data[0]['paymentdone']);
-
                 $("#progid").val(data[0]['prog_id']);
             },
             error: function (data) {
@@ -586,9 +623,9 @@
         }).done(function (data) {
         });
     });
-
 </script>
 
+<!-- edit programs and attendance pdf script -->
 <script>
     $(".edit_btn_program").click(function () {
 
@@ -665,7 +702,8 @@
     });
 
 </script>
-
+<!-- /edit programs and attendance pdf script -->
+<!-- this script for lock details  -->
 <script>
     // Key to store locked state in localStorage
     const LOCK_STORAGE_KEY = 'lockedActions';
@@ -679,7 +717,6 @@
             disableDropdownActions(progId);
         });
     });
-
     // Function to lock actions for a specific prog_id
     function lockActions(progId) {
         // Retrieve current locked state
@@ -696,7 +733,6 @@
             });
             return; // Exit the function if already locked
         }
-
         // Show confirmation dialog before locking actions
         Swal.fire({
             icon: 'warning',
@@ -713,7 +749,6 @@
                 lockedActions.push(progId);
                 localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(lockedActions));
                 disableDropdownActions(progId);
-
                 // Show feedback message after locking
                 Swal.fire({
                     icon: 'info',
@@ -735,8 +770,6 @@
         });
     }
 
-
-
     // Function to disable dropdown actions for a specific prog_id
     function disableDropdownActions(progId) {
         const dropdownMenu = document.querySelectorAll(`.dropdown-menu [data-id="${progId}"]`);
@@ -747,14 +780,14 @@
         });
 
         // Disable delete action explicitly
-        const deleteBtn = document.querySelector(`.dropdown-menu .delete-btn[href*="${progId}"]`);
+        const deleteBtn = document.querySelector(`.dropdown-menu .delete-btn[href *= "${progId}"]`);
         if (deleteBtn) {
             deleteBtn.classList.add('disabled');
             deleteBtn.setAttribute('aria-disabled', 'true');
             deleteBtn.removeAttribute('href');
         }
         // Disable delete action explicitly
-        const lockBtn = document.querySelector(`.dropdown-menu .lock-btn[href*="${progId}"]`);
+        const lockBtn = document.querySelector(`.dropdown-menu .lock-btn[href *= "${progId}"]`);
         if (lockBtn) {
             lockBtn.classList.add('disabled');
             lockBtn.setAttribute('aria-disabled', 'true');
@@ -778,7 +811,7 @@
         });
 
         // Re-enable delete action explicitly
-        const deleteBtn = document.querySelector(`.dropdown-menu .delete-btn[href*="${progId}"]`);
+        const deleteBtn = document.querySelector(`.dropdown-menu .delete-btn[href *= "${progId}"]`);
         if (deleteBtn) {
             deleteBtn.classList.remove('disabled');
             deleteBtn.removeAttribute('aria-disabled');
@@ -786,7 +819,14 @@
         }
     }
 </script>
-
+<!-- /this script for lock details  -->
+<style>
+    .dropdown-item.disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+</style>
+<!-- delete details -->
 <script>
     function confirmDelete(url) {
         Swal.fire({
@@ -805,29 +845,52 @@
     }
 </script>
 
-<style>
-    .dropdown-item.disabled {
-        pointer-events: none;
-        opacity: 0.6;
-    }
-</style>
-
+<!-- this script for session expire time -->
 <script>
-    // Session expiration timeout (15 minutes in milliseconds)
-    const sessionExpiryTime = <?= config('Session')->expiration * 1000; ?>;
+    // Get the session expiration time passed from PHP
+    let sessionExpiryTime = <?= $session_expiry_time ?>; // The timestamp when the session will expire
+    let lastActivityTime = Date.now(); // Store the last activity time (initially the page load time)
+    let inactivityLimit = 60 * 1000; // 10 minute in milliseconds
 
-    setTimeout(() => {
-        alert('Your session has expired. You will be redirected to the login page.');
-        window.location.href = '/login'; // Redirect to the login page
-    }, sessionExpiryTime);
-</script>
-
-
-<style>
-    .close-white {
-        color: white;
+    // Function to reset the inactivity timer on user activity
+    function resetInactivityTimer() {
+        lastActivityTime = Date.now(); // Reset the last activity time
     }
-</style>
+    // Attach event listeners for user activity (mousemove, keypress)
+    document.addEventListener("mousemove", resetInactivityTimer);
+    document.addEventListener("keypress", resetInactivityTimer);
+    document.addEventListener("click", resetInactivityTimer);
 
+    // Update the countdown every second
+    let countdown = setInterval(function () {
+        let currentTime = Math.floor(Date.now() / 1000); // Get the current time in seconds
+        let remainingTime = sessionExpiryTime - currentTime; // Calculate the remaining time in seconds
+
+
+        // Check for inactivity (if the last activity was more than 1 minute ago)
+        if (Date.now() - lastActivityTime > inactivityLimit) {
+            // If inactive for more than 1 minute, consider the session expired
+            clearInterval(countdown); // Stop the countdown
+
+            // Show SweetAlert for session expiry
+            Swal.fire({
+                title: 'Session Expired',
+                text: 'You have been inactive for too long. Please log in again.',
+                icon: 'warning',
+                confirmButtonText: 'OK',
+                allowOutsideClick: false, // Disable closing by clicking outside
+                allowEscapeKey: false, // Disable closing with escape key
+            }).then(() => {
+                // Redirect to login page after SweetAlert closes
+                window.location.href = "/"; // Modify this URL as per your requirement
+            });
+        } else {
+            // Calculate minutes and seconds
+            let minutes = Math.floor(remainingTime / 60);
+            let seconds = remainingTime % 60;
+            document.getElementById("session-timer").innerText = `Session will expire in: ${minutes}m ${seconds}s`;
+        }
+    }, 1000); // Update every 1 second
+</script>
 <?php include('template/footer.php'); ?>
 <!-- /page content -->

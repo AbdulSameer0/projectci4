@@ -69,29 +69,37 @@
                     <div class="clearfix"></div>
                     <br />
                     <!-- sidebar menu -->
-                   <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <!-- <h3>General</h3> -->
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="<?php echo base_url('/admin/dashboard'); ?>"><i class="fa fa-home"></i> Home</a>
+                                    <a href="<?php echo base_url('admin/dashboard'); ?>"><i class="fa fa-home"></i> Home
+                                        <!-- <span class="fa fa-chevron-down"></span></a> --></a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('/admin/register'); ?>"><i class="fa fa-user-plus"></i>User Register</a>
+                                    <a href="<?php echo base_url('/admin/register'); ?>">
+                                        <i class="fa fa-user-plus"></i> Registration</a>
                                 </li>
                             </ul>
-
                         </div>
-                    </div>
+                    </div>
                     <!-- /sidebar menu -->
                 </div>
             </div>
             <!-- top navigation -->
             <div class="top_nav">
                 <div class="nav_menu">
+
                     <div class="nav toggle">
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
+                    <!-- <div id="session-timer-container">
+                            <p id="session-timer">Session will expire in: Loading...</p>
+                            <p id="session-warning" style="color: red; display: none;">Your session is about to expire.
+                                Please take action!</p>
+                        </div> -->
+
                     <nav class="nav navbar-nav">
                         <ul class="navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px">

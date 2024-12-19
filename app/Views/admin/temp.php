@@ -228,3 +228,52 @@
         $session->setFlashdata('success', 'Details added successfully.');
         return redirect()->to('admin/dashboard');  // Redirect to the dashboard or another page
     }*/ -->
+/* <!-- program pdf -->
+<td class="text-center text-capitalize text-wrap">
+    <?php if (!empty($key['progPdf'])): ?>
+        <button type="button" class="btn btn-outline-primary" style="padding:
+                                                                    8px 16px; font-size: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0,
+                                                                    0.1);"
+            onclick="window.open('<?= base_url('public/uploads/programsPdf/' . $key['progPdf']); ?>', '_blank');"
+            title="Click to view the PDF">
+            View PDF <i class="fa fa-eye"></i>
+        </button>
+        <br>
+        <?php
+        // Extract the username from the file name
+        $fileName = $key['progPdf'];
+        $fileParts = explode(' by ', $fileName); // Split the filename at ' by '
+        $uploadedBy = isset($fileParts[1]) ? $fileParts[1] : 'Unknown'; // Extract username or set as 'Unknown'
+        ?>
+        <span class="text-info">
+            <?= 'uploaded by ' . $uploadedBy; ?>
+        </span>
+    <?php else: ?>
+        <span class="text-danger font-italic">No PDF Available</span>
+        <br>
+    <?php endif; ?>
+</td>
+<!-- attendance pdf -->
+<td class="text-center text-capitalize text-wrap">
+    <?php if (!empty($key['attendancePdf'])): ?>
+        <button type="button" class="btn btn-outline-primary"
+            style="padding: 8px 16px; font-size: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+            onclick="window.open('<?= base_url('public/uploads/attendancePdf/' . $key['attendancePdf']); ?>', '_blank');"
+            title="Click to view the PDF">
+            View PDF <i class="fa fa-eye"></i>
+        </button>
+        <br>
+        <?php
+        // Extract the username from the file name
+        $fileName = $key['attendancePdf'];
+        $fileParts = explode(' by ', $fileName); // Split the filename at ' by '
+        $uploadedBy = isset($fileParts[1]) ? $fileParts[1] : 'Unknown'; // Extract username or set as 'Unknown'
+        ?>
+        <span class="text-info">
+            <?= 'uploaded by ' . $uploadedBy; ?>
+        </span>
+    <?php else: ?>
+        <span class="text-danger font-italic">No PDF Available</span>
+        <br>
+    <?php endif; ?>
+</td> */

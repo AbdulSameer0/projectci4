@@ -50,9 +50,15 @@
                                 <input type="password" name="password" class="form-control" placeholder="Password"
                                     id="password" required="" /> <!-- Added name attribute -->
                             </div>
+                            <div class="col-md-12">
+                                <div class="float-right">
+                                    <input type="checkbox" onclick="myFunction()"> Show Password
+                                </div>
+                            </div>
                         </div>
+                        <!-- login button  -->
                         <div class="float-center">
-                            <button type="submit" class="btn btn-primary float-center ml-2">
+                            <button type="submit" class="btn btn-primary ml-2">
                                 Login <i class="fa fa-paper-plane"></i>
                             </button>
                         </div>
@@ -70,7 +76,16 @@
         </div>
     </div>
 </body>
-
-
+<script>
+    // function for show password 
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 
 </html>

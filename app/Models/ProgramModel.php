@@ -82,10 +82,32 @@ class ProgramModel extends Model
         }
     }
 
+    // Method to update form details 
+    public function updateDetailsModel($data, $id)
+    {
+        // print_r('$aaaaaaaaaaaaaaaaaaa');
+        // // print_r($data);
+        // print_r($id);
+        // die;
+
+        $query = $this->db->table('projectci4.programme_info');
+        $query->where('prog_id', $id);
+        $query->update($data);
+
+        // $query->insert($data);
+        // print_r($query);
+        // die;
+        if ($query) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
     public function getuserProgramRecord($prog_id)
     {
         // print_r($prog_id);die;
-        $query = "select prog_id, progTitle,progPdf,attendancePdf from programme_info where prog_id = '$prog_id'";
+        $query = "select prog_id, progTitle,progPdf from programme_info where prog_id = '$prog_id'";
         // print_r($query);
         // die;
         $result = $this->db->query($query);
@@ -96,28 +118,7 @@ class ProgramModel extends Model
             return false;
         }
     }
-
-    // Method to update form details 
-
-    public function updateDetailsModel($data, $id)
-    {
-        // print_r($data);
-        // print_r($id);
-        // die;
-
-        $query = $this->db->table('projectci4.programme_info');
-        $query->where('prog_id', $id);
-        $query->update($data);
-
-        // $query->insert($data);
-        // print_r($query);die;
-        if ($query) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-
+    // update both program and attendance pdfs 
     public function updatePdfRecord($data, $id)
     {
         // print_r($data);
@@ -146,8 +147,6 @@ class ProgramModel extends Model
             return FALSE;
         }
     }
-
-
 
 }
 
