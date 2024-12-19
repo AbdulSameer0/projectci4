@@ -85,7 +85,7 @@ class ProgramModel extends Model
     public function getuserProgramRecord($prog_id)
     {
         // print_r($prog_id);die;
-        $query = "select prog_id, progTitle,progPdf from programme_info where prog_id = '$prog_id'";
+        $query = "select prog_id, progTitle,progPdf,attendancePdf from programme_info where prog_id = '$prog_id'";
         // print_r($query);
         // die;
         $result = $this->db->query($query);

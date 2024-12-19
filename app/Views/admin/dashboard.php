@@ -176,7 +176,7 @@
                                                                             <i class="fa fa-edit"></i> Edit Details
                                                                         </a>
                                                                         <!-- edit prog. Schedule pdf -->
-                                                                        <a class="dropdown-item text-danger edit_btn_pdf"
+                                                                        <a class="dropdown-item text-danger edit_btn_program"
                                                                             data-toggle="modal"
                                                                             data-target="#edit_program_pdf_Modal"
                                                                             data-id="<?php echo $key['prog_id']; ?>"
@@ -186,7 +186,7 @@
                                                                             Schedule(pdf)
                                                                         </a>
                                                                         <!-- edit attendance Schedule pdf -->
-                                                                        <a class="dropdown-item text-danger edit_btn_pdf1"
+                                                                        <a class="dropdown-item text-danger edit_btn_attendance"
                                                                             href="#" data-toggle="modal"
                                                                             data-target="#edit_attendance_pdf_Modal"
                                                                             data-id="<?php echo $key['prog_id']; ?>"
@@ -468,14 +468,14 @@
                                                     name="progPdf">
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td style="width: 30%;"><label for="attandancePdf">Attendance in
                                                     PDF</label>
                                             </td>
                                             <td><input type="file" class="mt-2 text-primary" id="attendancePdf"
                                                     name="attendancePdf">
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </table>
 
                             </div>
@@ -498,7 +498,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #2A3F54;">
-                            <h5 class="modal-title text-white" id="editProgramPdfModalLabel">Edit Program Schedule
+                            <h5 class="modal-title text-white" id="editProgramPdfModalLabel">Edit Attendance pdf
                                 <i class="fa fa-file-pdf-o"></i>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -508,23 +508,15 @@
                         <div class="modal-body">
                             <div class="form-area custom-background">
                                 <form id="edit_form_details"
-                                    action="<?php echo base_url('/admin/updateProgramRecord'); ?>" method="POST"
+                                    action="<?php echo base_url('/admin/updateAttendanceRecord'); ?>" method="POST"
                                     enctype="multipart/form-data">
                                     <table class="table table-bordered">
                                         <tr>
                                             <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
-                                            <td><input type="text" class="form-control" id="progTitle_id"
-                                                    name="progTitle" value="" placeholder="" readonly></td>
-                                            <td style="display: none;"><input type="text" class="form-control"
-                                                    id="progidd" name="progid" value="" placeholder=""></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 30%;"><label for="progPdf_11">Programme Schedule in
-                                                    PDF</label>
-                                            </td>
-                                            <td><input type="file" class="mt-2 text-primary" id="progPdf_666"
-                                                    name="progPdf">
-                                            </td>
+                                            <td><input type="text" class="form-control" id="att_Title_id"
+                                                    name="att_id" value="" placeholder=""></td>
+                                            <td class="d-none"><input type="text" class="form-control"
+                                                    id="attid" name="progid" value="" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="attandancePdf">Attendance in
@@ -596,9 +588,9 @@
 </script>
 
 <script>
-    $(".edit_btn_pdf").click(function () {
+    $(".edit_btn_program").click(function () {
 
-        alert("sameer111");
+        alert("sameerPrograms");
         var progId = $(this).data('id');
         //  alert(progId);
         $("#progidd").val(progId);
@@ -634,19 +626,19 @@
 </script>
 
 <script>
-    $(".edit_btn_pdf1").click(function () {
+    $(".edit_btn_attendance").click(function () {
 
-        alert("sameer222");
+        alert("sameerAttendance");
         var progId = $(this).data('id');
-        //  alert(progId);
-        $("#progidd").val(progId);
-        // $("#progTitle").val(progTitle);
+        alert(progId);
+        $("#attid").val(progId);
+        $("#att_Title_id").val(progTitle);
 
-        alert("progId:" + progId);
+        alert("progId:" + progTitle);
 
         $.ajax({
 
-            url: '<?php echo base_url() . "/admin/get-data-for-program1/" ?>',
+            url: '<?php echo base_url() . "/admin/get-data-for-attendance/" ?>',
             dataType: 'json',
             contentType: 'application/json',
             type: 'GET',
@@ -658,9 +650,10 @@
             beforeSend: function () { },
             success: function (data) {
                 console.log(data);
-                //     alert(data[0]['progid']);
-                $("#progTitle_id").val(data[0]['progTitle']);
-                $("#progid").val(data[0]['prog_id']);
+                  alert(data[0]['progid']);
+              
+                $("#att_Title_id").val(data[0]['progTitle']);
+                $("#attid").val(data[0]['prog_id']);
             },
             error: function (data) {
                 console.log(data);
@@ -816,6 +809,16 @@
         opacity: 0.6;
     }
 </style>
+
+<script>
+    // Session expiration timeout (15 minutes in milliseconds)
+    const sessionExpiryTime = <?= config('Session')->expiration * 1000; ?>;
+
+    setTimeout(() => {
+        alert('Your session has expired. You will be redirected to the login page.');
+        window.location.href = '/login'; // Redirect to the login page
+    }, sessionExpiryTime);
+</script>
 
 
 
