@@ -82,7 +82,7 @@ class Admin extends BaseController
         }
     }
 
-public function dashboard()
+    public function dashboard()
     {
         helper(['form', 'filesystem']);
         $model = new ProgramModel();
@@ -101,8 +101,8 @@ public function dashboard()
         $data['prog_data'] = $programmeInfo;
         return view('admin/dashboard', $data); // Pass formatted data to the view
     }
-   
-   
+
+
     public function saveDetails()
     {
         $session = session();  // Get the session object
@@ -267,19 +267,6 @@ public function dashboard()
         $request = service('request');
         $id = $request->getPost('progid');
         $prog_pdf = $request->getFile('progPdf');
-        // $attendancePdf = $request->getFile('attendancePdf');
-        // print_r($prog_pdf);
-        // die;    
-
-        // Collect form data
-        // $data = [
-        //     'progTitle' => $request->getPost('progTitle'),
-        //     'progPdf' => $request->getFile('progPdf'),
-        //     'attendancePdf' => $request->getFile('attendancePdf'),
-        // ];
-
-        // print_r($data);
-        // die;
 
         // Get the username from the session
         $userName = session()->get('name');
@@ -288,20 +275,18 @@ public function dashboard()
             return redirect()->to('/dashboard');
         }
         // print_r($userName);
-//         die;
+        // die;
 
+        // Handle program PDF upload if it exists
+        if ($prog_pdf && $prog_pdf->isValid()) {
             $originalProgFileName = $prog_pdf->getName();
             $progFileExtension = $prog_pdf->getExtension();
             $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;       //(. ' by ' . $userName)
             $prog_pdf->move('public/uploads/updateProgramsPdf', $newProgFileName);
-            $data['progPdf'] = $newProgFileName; 
-            
-            // $originalProgFileName = $attendancePdf->getName();
-            // $progFileExtension = $attendancePdf->getExtension();
-            // $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;       //(. ' by ' . $userName)
-            // $attendancePdf->move('public/uploads/updateAttendancePdf', $newProgFileName);
-            // $data['attendancePdf'] = $newProgFileName;  
-        
+            $data['progPdf'] = $newProgFileName;
+        }
+
+
         // Ensure at least one file was successfully uploaded
         if (!isset($data['progPdf']) && !isset($data['attendancePdf'])) {
             session()->setFlashdata('error', 'Please upload valid PDF files for both Program and Attendance. sameer');
@@ -331,7 +316,7 @@ public function dashboard()
         print_r("Sameer");
         // die;
         $id = $this->request->getGet('prog_id');
-       // echo $id;
+        // echo $id;
         // die;
 
         if (!$id) {
@@ -349,22 +334,8 @@ public function dashboard()
     {
         $request = service('request');
         $id = $request->getPost('progid');
-       // $prog_pdf = $request->getFile('progPdf');
+        // $prog_pdf = $request->getFile('progPdf');
         $attendancePdf = $request->getFile('attendancePdf');
-        // print_r($id);
-        // print_r($attendancePdf);
-        // die;    
-
-        // Collect form data
-        // $data = [
-        //     'progTitle' => $request->getPost('progTitle'),
-        //     'progPdf' => $request->getFile('progPdf'),
-        //     'attendancePdf' => $request->getFile('attendancePdf'),
-        // ];
-
-        // print_r($data);
-        // die;
-
         // Get the username from the session
         $userName = session()->get('name');
         if (!$userName) {
@@ -372,20 +343,16 @@ public function dashboard()
             return redirect()->to('/dashboard');
         }
         // print_r($userName);
-//         die;
+        // die;
 
-            // $originalProgFileName = $prog_pdf->getName();
-            // $progFileExtension = $prog_pdf->getExtension();
-            // $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;       //(. ' by ' . $userName)
-            // $prog_pdf->move('public/uploads/updateProgramsPdf', $newProgFileName);
-            // $data['progPdf'] = $newProgFileName; 
-            
+        if ($attendancePdf && $attendancePdf->isValid()) {
             $originalProgFileName = $attendancePdf->getName();
             $progFileExtension = $attendancePdf->getExtension();
             $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;       //(. ' by ' . $userName)
             $attendancePdf->move('public/uploads/updateAttendancePdf', $newProgFileName);
-            $data['attendancePdf'] = $newProgFileName;  
-        
+            $data['attendancePdf'] = $newProgFileName;
+        }
+
         // Ensure at least one file was successfully uploaded
         if (!isset($data['progPdf']) && !isset($data['attendancePdf'])) {
             session()->setFlashdata('error', 'Please upload valid PDF files for both Program and Attendance. sameer');

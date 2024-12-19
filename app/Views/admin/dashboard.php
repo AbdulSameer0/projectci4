@@ -235,9 +235,11 @@
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #2A3F54;">
                             <h5 class="modal-title text-white" id="addDetailsModalLabel">Add Details</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                            <button type="button" class="close close-white text-color-red" data-dismiss="modal"
+                                aria-label="Close">
+                                <span aria-hidden="true">×</span>
                             </button>
+
                         </div>
                         <div class="modal-body">
                             <div class="form-area custom-background">
@@ -513,10 +515,10 @@
                                     <table class="table table-bordered">
                                         <tr>
                                             <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
-                                            <td><input type="text" class="form-control" id="att_Title_id"
-                                                    name="att_id" value="" placeholder=""></td>
-                                            <td class="d-none"><input type="text" class="form-control"
-                                                    id="attid" name="progid" value="" placeholder=""></td>
+                                            <td><input type="text" class="form-control" id="att_Title_id" name="att_id"
+                                                    value="" placeholder=""></td>
+                                            <td class="d-none"><input type="text" class="form-control" id="attid"
+                                                    name="progid" value="" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="attandancePdf">Attendance in
@@ -650,8 +652,8 @@
             beforeSend: function () { },
             success: function (data) {
                 console.log(data);
-                  alert(data[0]['progid']);
-              
+                alert(data[0]['progid']);
+
                 $("#att_Title_id").val(data[0]['progTitle']);
                 $("#attid").val(data[0]['prog_id']);
             },
@@ -821,7 +823,11 @@
 </script>
 
 
-
+<style>
+    .close-white {
+        color: white;
+    }
+</style>
 
 <?php include('template/footer.php'); ?>
 <!-- /page content -->
