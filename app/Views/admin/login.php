@@ -27,7 +27,7 @@
 
 <body class="login" style="background: rgb(199, 202, 203)">
     <div class="col-md-12 mb-5">
-        <div class="error-message float-right">
+        <div class="error-message float-right" id="flashMessage">
             <?php if (session()->getFlashdata('error')): ?>
                 <div id="error-message" class="alert alert-danger text-white">
                     <?= session()->getFlashdata('error'); ?>
@@ -76,6 +76,14 @@
         </div>
     </div>
 </body>
+<script>
+    setTimeout(function () {
+        let flashMessage = document.getElementById('flashMessage');
+        if (flashMessage) {
+            flashMessage.style.display = 'none';
+        }
+    }, 3000); // 3000ms = 3 seconds
+</script>
 <script>
     // function for show password 
     function myFunction() {

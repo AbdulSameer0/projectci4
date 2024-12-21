@@ -103,7 +103,7 @@ class ProgramModel extends Model
             return FALSE;
         }
     }
-
+    // method to get program record 
     public function getuserProgramRecord($prog_id)
     {
         // print_r($prog_id);die;
@@ -141,6 +141,20 @@ class ProgramModel extends Model
 
         // $query->insert($userdata);
 
+        if ($query) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    //update attendance pdf method
+    public function updateAttendancePdf($data, $id)
+    {
+        $demo1 = $data['attendancePdf'];
+        $query = "UPDATE projectci4.programme_info  SET attendancePdf  = $demo1 WHERE prog_id = $id";
+        $query = $this->db->table('projectci4.programme_info');
+        $query->where('prog_id', $id);
+        $query->update($data);
         if ($query) {
             return TRUE;
         } else {

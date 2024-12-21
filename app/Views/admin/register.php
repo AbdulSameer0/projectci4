@@ -65,6 +65,11 @@
                                 <input type="password" name="cpass" class="form-control" placeholder="Confirm Password"
                                     id="cpass" required="" /> <!-- Added name attribute -->
                             </div>
+                            <div class="col-md-12">
+                                <div class="float-right">
+                                    <input type="checkbox" onclick="myFunction()"> Show Password
+                                </div>
+                            </div>
                         </div>
                         <div class="float-center">
                             <button type="submit" class="btn btn-primary float-center ml-2">
@@ -92,6 +97,19 @@
             flashMessage.style.display = 'none';
         }
     }, 3000); // 3000ms = 3 seconds
+</script>
+<script>// function for show password 
+    function myFunction() {
+        var x = document.getElementById("password");
+        var y = document.getElementById("cpass");
+        if (x.type === "password" || y.type === "cpass") {
+            x.type = "text";
+            y.type = "text"
+        } else {
+            x.type = "password";
+            y.type = "password"
+        }
+    }
 </script>
 
 </html>

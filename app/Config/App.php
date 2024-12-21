@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://localhost:8082/';         //    http://localhost:8082/
+    public string $baseURL = 'http://10.197.132.235:8082/';         //    http://localhost:8082/
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -211,7 +211,7 @@ class App extends BaseConfig
     public $session = [
         'driver' => 'CodeIgniter\Session\Handlers\DatabaseHandler', // Or whatever session driver you're using
         'cookieName' => 'ci_session',
-        'expiration' => 300, // 900 seconds = 15 minutes
+        'expiration' => 60, // 900 seconds = 15 minutes
         'savePath' => '', // Leave it empty for default storage
         'restrictCookie' => true,
         'secure' => false,

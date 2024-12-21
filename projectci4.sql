@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2024 at 08:51 AM
+-- Generation Time: Dec 19, 2024 at 11:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,10 +40,10 @@ CREATE TABLE `admin_info` (
 --
 
 INSERT INTO `admin_info` (`id`, `name`, `email`, `password`, `created_at`) VALUES
-(8, 'demo', 'demo@gamil.com', 'demo12', '2024-12-04 12:30:53'),
 (13, 'admin', 'admin@gmail.com', 'admin1', '2024-12-10 10:54:06'),
-(14, 'ritika', 'ritika@gmail.com', 'ritika1', '2024-12-10 10:54:47'),
-(15, 'abdul sameer', 'sameer@gmail.com', 'sameer', '2024-12-10 12:45:50');
+(16, 'user1', 'user1@gmail.com', 'user12', '2024-12-11 11:29:10'),
+(17, 'ritika', 'ritika@gmail.com', 'ritika1', '2024-12-11 14:47:32'),
+(18, 'demo', 'demo@gmail.com', 'demo45', '2024-12-19 11:06:07');
 
 -- --------------------------------------------------------
 
@@ -58,8 +58,8 @@ CREATE TABLE `programme_info` (
   `date` date NOT NULL,
   `progDirector` varchar(200) NOT NULL,
   `dealingAsstt` varchar(200) NOT NULL,
-  `progPdf` varchar(255) NOT NULL,
-  `attendancePdf` varchar(255) NOT NULL,
+  `progPdf` longblob DEFAULT NULL,
+  `attendancePdf` longblob DEFAULT NULL,
   `materialLink` varchar(200) NOT NULL,
   `paymentdone` varchar(200) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -71,7 +71,8 @@ CREATE TABLE `programme_info` (
 --
 
 INSERT INTO `programme_info` (`prog_id`, `progTitle`, `targetGroup`, `date`, `progDirector`, `dealingAsstt`, `progPdf`, `attendancePdf`, `materialLink`, `paymentdone`, `created_at`, `updated_at`) VALUES
-(354, 'demo22211', 'TG-1', '2024-12-11', 'PD-1', 'DA-1', 'Admit Card - Junior Judicial Assistant Exam.pdf', 'Admit Card - Junior Judicial Assistant Exam.pdf', 'www.demo.com', 'no', '2024-12-10 07:17:00', '2024-12-10 07:17:00');
+(495, 'demo', 'TG-2', '2024-12-20', 'PD-2', 'DA-2', 0x6c6574746572732e7064662062792061646d696e, 0x66696c655f31382e7064662062792061646d696e, 'sdfsafsaf', 'yes', '2024-12-19 09:54:02', '2024-12-19 09:54:02'),
+(496, 'dsfa', 'TG-3', '2024-12-21', 'PD-2', 'DA-2', 0x41646d69742043617264202d204a756e696f72204a7564696369616c20417373697374616e74204578616d2e7064662062792061646d696e, 0x66696c655f31382e706466206279207573657231, 'sdfaf', 'no', '2024-12-19 09:56:55', '2024-12-19 09:56:55');
 
 --
 -- Indexes for dumped tables
@@ -97,13 +98,13 @@ ALTER TABLE `programme_info`
 -- AUTO_INCREMENT for table `admin_info`
 --
 ALTER TABLE `admin_info`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `programme_info`
 --
 ALTER TABLE `programme_info`
-  MODIFY `prog_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
+  MODIFY `prog_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=497;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

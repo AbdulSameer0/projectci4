@@ -81,6 +81,50 @@ class Admin extends BaseController
         }
     }
 
+    public function checkSessionTimeout()
+    {
+        $session = session();
+        $loggedInTime = $session->get('logged_in_time');
+        $timeoutDuration = 30 * 60; // 30 minutes in seconds
+
+        if ($loggedInTime && (time() - $loggedInTime) > $timeoutDuration) {
+            // If the session has expired, destroy the session and redirect to login
+            $session->destroy();
+            return redirect()->to('/');
+        }
+    }
+
+    /*public function login()
+    {
+        $session = session();
+
+        // Check if the user is already logged in
+        if ($session->get('logged_in') === true) {
+            // User is already logged in, so redirect to the dashboard or desired page
+            return redirect()->to('admin/dashboard');
+        }
+
+        $email = $this->request->getPost('name');
+        $password = $this->request->getPost('password');
+        $model = new AdminModel();
+        $admin = $model->where('name', $email)->first();
+
+        // Check if the admin exists and the password matches
+        if ($admin && $admin['password'] === $password) {
+            // Store user info in session
+            $session->set('logged_in', true);
+            $session->set('name', $admin['name']);  // Store the logged-in user's name
+
+            // Redirect to the dashboard after successful login
+            return redirect()->to('admin/dashboard');
+        } else {
+            // Invalid login details
+            $session->setFlashdata('error', '<i class="fa fa-warning"></i> Invalid username or password.');
+            return redirect()->to('/');
+        }
+    }*/
+
+
     public function dashboard()
     {
         // Helper functions for form and filesystem
@@ -289,8 +333,8 @@ class Admin extends BaseController
         if ($prog_pdf && $prog_pdf->isValid()) {
             $originalProgFileName = $prog_pdf->getName();
             $progFileExtension = $prog_pdf->getExtension();
-            $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;       //(. ' by ' . $userName)
-            $prog_pdf->move('public/uploads/programsPdf', $newProgFileName);
+            $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;
+            $prog_pdf->move('public/uploads/updateProgramsPdf', $newProgFileName);
             $data['progPdf'] = $newProgFileName;  // Save the new file name in the database
         }
         // Ensure at least one file was successfully uploaded
@@ -315,7 +359,6 @@ class Admin extends BaseController
         // Redirect to the dashboard
         return redirect()->to('admin/dashboard');
     }
-
     // get attendance pdf record 
     public function getAttendanceRecord()
     {
@@ -339,6 +382,8 @@ class Admin extends BaseController
     {
         $request = service('request');
         $id = $request->getPost('progid');
+        // print_r($id);
+        // die;
         // $prog_pdf = $request->getFile('progPdf');
         $attendancePdf = $request->getFile('attendancePdf');
 
@@ -351,12 +396,11 @@ class Admin extends BaseController
         // print_r($userName);
         // die;
 
-
         if ($attendancePdf && $attendancePdf->isValid()) {
             $originalProgFileName = $attendancePdf->getName();
             $progFileExtension = $attendancePdf->getExtension();
             $newProgFileName = pathinfo($originalProgFileName, PATHINFO_FILENAME) . '.' . $progFileExtension . ' by ' . $userName;       //(. ' by ' . $userName)
-            $attendancePdf->move('public/uploads/attendancePdf', $newProgFileName);
+            $attendancePdf->move('public/uploads/updateAttendancePdf', $newProgFileName);
             $data['attendancePdf'] = $newProgFileName;
         }
         // Ensure at least one file was successfully uploaded
@@ -364,7 +408,6 @@ class Admin extends BaseController
             session()->setFlashdata('error', 'Please upload valid PDF files for both Program and Attendance. sameer');
             return redirect()->to('admin/dashboard');
         }
-
         // Update the record in the database
         $programModel = new ProgramModel();
         try {

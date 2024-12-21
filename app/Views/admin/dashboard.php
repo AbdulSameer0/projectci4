@@ -499,8 +499,8 @@
                                             <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
                                             <td><input type="text" class="form-control" id="progTitle_id"
                                                     name="progTitle" value="" placeholder="" readonly></td>
-                                            <td style="display: none;"><input type="text" class="form-control"
-                                                    id="progidd" name="progid" value="" placeholder=""></td>
+                                            <td class="d-none"><input type="text" class="form-control" id="progidd"
+                                                    name="progid" value="" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="progPdf_11">Programme Schedule in
@@ -554,17 +554,21 @@
                                     enctype="multipart/form-data">
                                     <table class="table table-bordered">
                                         <tr>
-                                            <td style="width: 30%;"><label for="progTitle">Programme Title</label></td>
-                                            <td><input type="text" class="form-control" id="att_Title_id" name="att_id"
-                                                    value="" placeholder=""></td>
-                                            <td class="d-none"><input type="text" class="form-control" id="attid"
+                                            <td style="width: 30%;">
+                                                <label for="progTitle">Programme Title</label>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" id="att_Title_id"
+                                                    name="attTitle" value="" placeholder="" readonly>
+                                            </td>
+                                            <td class="d-none"><input type="text" class="form-control" id="attidd"
                                                     name="progid" value="" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 30%;"><label for="attandancePdf">Attendance in
                                                     PDF</label>
                                             </td>
-                                            <td><input type="file" class="mt-2 text-primary" id="attendancePdf"
+                                            <td><input type="file" class="mt-2 text-primary" id="attendancePdf_666"
                                                     name="attendancePdf">
                                             </td>
                                         </tr>
@@ -578,7 +582,6 @@
                             </button>
                             <?php echo form_close(); ?>
                         </div>
-
                     </div>
                 </div>
 
@@ -624,21 +627,18 @@
         });
     });
 </script>
-
+<!-- /details edit script end -->
 <!-- edit programs and attendance pdf script -->
+<!-- programs pdf -->
 <script>
     $(".edit_btn_program").click(function () {
-
-        alert("sameerPrograms");
+        // alert("ProgramsPDF");
         var progId = $(this).data('id');
-        //  alert(progId);
+        // alert(progId);
         $("#progidd").val(progId);
         // $("#progTitle").val(progTitle);
-
-        alert("progId:" + progId);
-
+        // alert("progId:" + progId);
         $.ajax({
-
             url: '<?php echo base_url() . "/admin/get-data-for-program/" ?>',
             dataType: 'json',
             contentType: 'application/json',
@@ -646,8 +646,6 @@
             data: {
                 prog_id: progId,//all, branch, court, both, individual, deputation & diverted
             },
-
-
             beforeSend: function () { },
             success: function (data) {
                 console.log(data);
@@ -661,23 +659,19 @@
         }).done(function (data) {
         });
     });
-
 </script>
-
+<!-- attendance pdf -->
 <script>
     $(".edit_btn_attendance").click(function () {
-
-        alert("sameerAttendance");
+        // alert("AttendancePDF");                 // alert for attendance pdf 
         var progId = $(this).data('id');
-        alert(progId);
-        $("#attid").val(progId);
-        $("#att_Title_id").val(progTitle);
-
-        alert("progId:" + progTitle);
-
+        // alert(progId);                          // alert for program ID
+        $("#attidd").val(progId);
+        // $("#att_Title_id").val(progTitle);
+        // alert("progId:" + progId);              // alert again for program ID
         $.ajax({
 
-            url: '<?php echo base_url() . "/admin/get-data-for-attendance/" ?>',
+            url: '<?php echo base_url() . "/admin/get-data-for-program/" ?>',
             dataType: 'json',
             contentType: 'application/json',
             type: 'GET',
@@ -685,12 +679,10 @@
                 prog_id: progId,//all, branch, court, both, individual, deputation & diverted
             },
 
-
             beforeSend: function () { },
             success: function (data) {
                 console.log(data);
-                alert(data[0]['progid']);
-
+                //   alert(data[0]['progid']);
                 $("#att_Title_id").val(data[0]['progTitle']);
                 $("#attid").val(data[0]['prog_id']);
             },
@@ -850,7 +842,7 @@
     // Get the session expiration time passed from PHP
     let sessionExpiryTime = <?= $session_expiry_time ?>; // The timestamp when the session will expire
     let lastActivityTime = Date.now(); // Store the last activity time (initially the page load time)
-    let inactivityLimit = 60 * 1000; // 10 minute in milliseconds
+    let inactivityLimit = 120 * 1000; // 10 minute in milliseconds
 
     // Function to reset the inactivity timer on user activity
     function resetInactivityTimer() {
